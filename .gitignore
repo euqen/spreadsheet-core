@@ -1,0 +1,11 @@
+*.bak
+*.log
+.vagrant/
+node_modules/
+server/public/
+build/
+*.zip
+.idea
+.idea/*
+.sass-cache
+jspm_packages/

@@ -1,5 +1,5 @@
 ## Pre requirements
-	``npm, jspm, node v4 or higher, mondodb, gulp``
+	npm, jspm, node v4 or higher, mondodb, gulp
 
 
 ## Install application

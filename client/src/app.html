@@ -9,10 +9,18 @@
     <!-- Bootstrap Material Design -->
     <link rel="stylesheet" type="text/css" href="assets/bootstrap-material-design.css">
     <link rel="stylesheet" type="text/css" href="assets/ripples.css">
+    <link rel="stylesheet" type="text/css" href="assets/custom.css">
 </head>
 <body>
-<script src="jspm_packages/system.js"></script>
-<script src="config.js"></script>
+<div class="showbox">
+    <div class="loader">
+        <svg class="circular" viewBox="25 25 50 50">
+            <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"/>
+        </svg>
+    </div>
+</div>
+<script src="/jspm_packages/system.js"></script>
+<script src="/config.js"></script>
 <script>
     System.import('./index');
 </script>

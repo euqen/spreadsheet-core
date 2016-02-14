@@ -1,3 +1,7 @@
-/**
- * Created by euqen on 14.2.16.
- */
+let config = {
+    environment: 'development'
+};
+
+const configuration = require(`./${process.env.NODE_ENV}`);
+export default Object.assign(config, configuration);
+

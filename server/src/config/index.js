@@ -1,5 +1,7 @@
 let config = {
-    environment: 'development'
+    environment: 'development',
+    port: 3000,
+    baseUrl: 'localhost'
 };
 
 const configuration = require(`./${process.env.NODE_ENV}`);

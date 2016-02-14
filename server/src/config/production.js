@@ -5,5 +5,6 @@ export default {
         subdomain: 'spreadsheet',
         json: 'true',
         tags: ['production']
-    }
+    },
+    baseUrl: 'spreadsheet.bsuir.by'
 }

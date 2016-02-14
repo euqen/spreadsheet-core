@@ -1,5 +1,5 @@
 ## Pre requirements
-	npm, jspm, node v4 or higher, mondodb, gulp
+	npm, jspm, node v4 or higher, mondodb, gulp, babel-node
 
 
 ## Install application
@@ -9,7 +9,7 @@
 
 ## Run application
 	$ cd server/src
-	$ node app.js
+	$ NODE_ENV=development babel-node app.js
 	
 ## Build application
 	$ cd client

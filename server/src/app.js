@@ -1,8 +1,8 @@
 'use strict';
 
-const express = require('express');
+import express from 'express';
 const app = express();
-const CLIENT_PATH = `${__dirname} + './../../client/src/`;
+const CLIENT_PATH = `${__dirname}/../../client/src/`;
 
 // Set default node environment to development
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
@@ -12,13 +12,7 @@ app.engine('html', require('ejs').renderFile);
 
 app.use(express.static(CLIENT_PATH));
 
-app.get('/', (req, res) => {
-    res.render('app.html');
-});
-
-app.get('/about', (req, res) => {
-    res.render('app.html');
-});
+require('./resources/routes')(app);
 
 app.listen(3000, () => {
     console.log('Spreadsheet application listening on port 3000!');

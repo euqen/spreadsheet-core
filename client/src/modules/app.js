@@ -10,11 +10,7 @@ export default class App extends React.Component {
 
     render() {
         return (
-            <div>
-                <div>
-                    <Link to="/about" className="btn btn-primary">About</Link>
-                    <Link to="/user" className="btn btn-primary">User</Link>
-                </div>
+            <div className="container">
                 {this.props.children}
             </div>
         )

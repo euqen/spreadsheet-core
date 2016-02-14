@@ -9,8 +9,10 @@
     "bootstrap-material-design": "npm:bootstrap-material-design@^0.5.8",
     "flux": "npm:flux@^2.1.1",
     "jquery": "npm:jquery@^2.2.0",
+    "materialize-css": "npm:materialize-css@^0.97.5",
     "react": "npm:react@^0.14.7",
     "react-dom": "npm:react-dom@^0.14.7",
-    "react-router": "npm:react-router@^2.0.0"
+    "react-router": "npm:react-router@^2.0.0",
+    "superagent": "npm:superagent@^1.7.2"
   }
 }

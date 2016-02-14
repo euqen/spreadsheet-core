@@ -1,16 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {browserHistory, Router, Route} from 'react-router'
+import {browserHistory, Router, Route, IndexRoute} from 'react-router'
 
-import App from './components/app';
-import About from './components/about';
-import User from './components/user';
+import App from './modules/app';
+import LogIn from './modules/log-in/log-in-view';
 
 const Routes = (
   <Router history={browserHistory}>
       <Route path="/" component={App}>
-          <Route path="about" component={About}></Route>
-          <Route path="user" component={User}></Route>
+          <IndexRoute component={LogIn}></IndexRoute>
       </Route>
   </Router>
 );

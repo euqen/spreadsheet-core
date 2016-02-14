@@ -4,6 +4,7 @@
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
 import express from 'express';
+import bodyParser from 'body-parser';
 import logger from './utils/logger';
 import config from './config';
 
@@ -12,6 +13,9 @@ const CLIENT_PATH = `${__dirname}/../../client/src/`;
 
 app.set('views', CLIENT_PATH);
 app.engine('html', require('ejs').renderFile);
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(express.static(CLIENT_PATH));
 app.use(logger.expressRequestsLogger);

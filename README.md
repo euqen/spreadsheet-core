@@ -1,5 +1,5 @@
 ## Pre requirements
-	npm, jspm, node v4 or higher, mondodb, gulp, babel-node
+	npm, jspm, node v4 or higher, mongodb, gulp, babel-node
 	$ sudo npm install babel@5.8.3		
 
 ## Install application

@@ -2,6 +2,7 @@
 
 import request from 'superagent';
 import dispatcher from './dispatcher';
+import store from 'marcuswestin/store.js';
 
 export default class WebAPI {
     constructor() {
@@ -22,15 +23,12 @@ export default class WebAPI {
                 result.hasErrors = true;
                 console.log('Request validation has failed: ' + result.text);
                 dispatcher.dispatch({
-                    res: result,
+                    res: response.body,
                     action: 'api:validation'
                 });
                 break;
             default:
                 console.log('Request has failed: ' + response.text);
-                result = {
-                    hasErrors: true
-                };
                 dispatcher.dispatch({
                     res: result,
                     action: 'api:error'
@@ -42,13 +40,13 @@ export default class WebAPI {
     }
 
     _makeRequest(request, options) {
-        request.set('Authorization', `Bearer iyiuyqwe123`);
+        request.set('Authorization', `Bearer ${store.get('token')}`);
 
         return new Promise((resolve, reject) => {
-                request.end((error, response) => error ? reject(error) : resolve(response));
-            })
-            .then(response => this._parseResponse(response))
-            .catch(error => this._parseResponse(error));
+             request.end((error, response) =>  !response ? reject(error) : resolve(response));
+        })
+        .then(response => this._parseResponse(response))
+        .catch(error => this._parseResponse(error));
     }
 
     _appendQueryParams(url, params = {}) {

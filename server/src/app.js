@@ -20,6 +20,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(CLIENT_PATH));
 app.use(logger.expressRequestsLogger);
 
+require('./resources/react.routes')(app);
 require('./resources/routes')(app);
 
 app.listen(config.port, () => {

@@ -1,7 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router';
-import bootstrap from 'bootstrap-material-design';
 import $ from 'jquery';
+import bootstrap from 'bootstrap-material-design';
 
 export default class App extends React.Component {
     componentDidMount() {

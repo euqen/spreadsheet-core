@@ -1,15 +1,17 @@
 import logInValidator from './validators/auth.log-in.validator';
 import service from './auth.service';
 
-export default {
-    logIn: (req, res) => {
+class AuthController {
+    logIn(req, res) {
         return logInValidator(req, res)
             .then(data => {
                 if (data.isValid) {
-                    const loggedUser = service.logIn(data);
+                   const token = service.generateSecureToken(data.result);
 
-                    res.send(loggedUser);
+                   res.send(token);
                 }
             });
     }
 }
+
+export default new AuthController();

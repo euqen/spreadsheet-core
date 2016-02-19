@@ -1,20 +1,17 @@
-export default {
-    validate: (validator, req, res) => {
-        let errors = new Errors();
+export default function validate (validator, req, res) {
+    let errors = new Errors();
 
-        return Promise.resolve(validator(errors))
-            .then((data) => {
-                if (errors.hasErrors()) {
-                    res.statusCode = 403;
-                    res.send(errors.retrieve());
-                }
+    return Promise.resolve(validator(errors))
+        .then((data) => {
+            if (errors.hasErrors()) {
+                res.status(400).send(errors.retrieve());
+            }
 
-                return {
-                    isValid: !errors.hasErrors(),
-                    data: data
-                }
-            });
-    }
+            return {
+                isValid: !errors.hasErrors(),
+                result: data
+            }
+        });
 }
 
 class Errors {

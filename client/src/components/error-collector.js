@@ -33,8 +33,7 @@ export default class ErrorCollector extends React.Component {
         return (
             <div>
                 {errors.length !== 0 ?
-                    <div className="alert alert-dismissible alert-danger">
-                        <button type="button" className="close" data-dismiss="alert">×</button>
+                    <div className="alert alert-danger">
                         {errors}
                     </div>
                 : null}

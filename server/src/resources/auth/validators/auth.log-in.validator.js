@@ -17,7 +17,7 @@ export default function(req, res) {
 
         if (!password) {
             errors.collect('password', 'Please specify password');
-        } else if (validator.isLength(password, {min: 6, max: 25})) {
+        } else if (!validator.isLength(password, {min: 6, max: 25})) {
             errors.collect('password', 'Password should contain from 6 to 25 symbols');
         }
 

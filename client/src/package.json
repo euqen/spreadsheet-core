@@ -6,6 +6,7 @@
     "core-js": "npm:core-js@^1.1.4"
   },
   "dependencies": {
+    "bootstrap": "github:twbs/bootstrap@^3.3.6",
     "bootstrap-material-design": "npm:bootstrap-material-design@^0.5.8",
     "flux": "npm:flux@^2.1.1",
     "jquery": "npm:jquery@^2.2.0",

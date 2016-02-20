@@ -38,18 +38,26 @@ export default class SignIn extends React.Component {
             <div className="row">
                 <div className="col-lg-4 middle">
                     <ErrorCollector />
-                    <div className="well">
-                        <h3 text-align="center"><strong>Authorization</strong></h3>
-                        <div className="form-group has-success">
-                            <label className="control-label" forHtml="email">E-Mail</label>
-                            <input type="text" className="form-control" onChange={this.onEmailChange.bind(this)} id="email" placeholder="example@site.com"/>
+                    <div className="panel panel-default">
+                        <div className="panel-heading">
+                            <h3 className="panel-title">Authorization</h3>
                         </div>
-                        <div className="form-group has-success m-t-10">
-                            <label className="control-label" forHtml="password">Password</label>
-                            <input type="password" className="form-control" onChange={this.onPasswordChange.bind(this)} id="password" placeholder="Your password"/>
+                        <div className="panel-body">
+                            <form role="form">
+                                <div className="form-group">
+                                    <label htmlFor="exampleInputEmail1">Email</label>
+                                    <input type="email" className="form-control" id="email"
+                                           placeholder="Enter email" onChange={this.onEmailChange.bind(this)}/>
+                                </div>
+                                <div className="form-group">
+                                    <label htmlFor="exampleInputPassword1">
+                                        Password</label>
+                                    <input type="password" className="form-control" id="password"
+                                           placeholder="Password" onChange={this.onPasswordChange.bind(this)}/>
+                                </div>
+                                <a className="btn btn-purple float-right" onClick={this.logIn.bind(this)}>Login</a>
+                            </form>
                         </div>
-                        <Link to="/reset">Reset password</Link>
-                        <button className="btn btn-raised btn-success btn-sm pull-right" onClick={this.logIn.bind(this)}>login</button>
                     </div>
                 </div>
             </div>

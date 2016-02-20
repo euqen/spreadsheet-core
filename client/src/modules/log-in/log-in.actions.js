@@ -8,7 +8,7 @@ export default class LogInActions {
         return api.post('api/v1/auth/log-in', data)
             .then(res => {
                 if (!res.hasErrors) {
-                    dispatcher.dispatch({action: 'user.logged-in', data: data});
+                    dispatcher.dispatch({action: 'user.logged-in', data: res});
                 }
             });
     }

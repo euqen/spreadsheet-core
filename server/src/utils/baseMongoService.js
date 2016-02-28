@@ -20,7 +20,15 @@ export default class BaseMongoService {
     }
 
     create(data, options) {
-        return new this.collection(data).save();
+        const model = new this.collection(data);
+        return model.save()
+            .then(doc => {
+                return doc.toObject();
+            })
+            .catch(err => {
+                console.log(err);
+                throw new Error(err.errors);
+            });
     }
 
     updateOne(query, updateFunc, options) {

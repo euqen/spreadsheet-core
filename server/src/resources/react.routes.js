@@ -2,7 +2,8 @@ const routes = [
     '/',
     '/about',
     '/users',
-    '/dashboard'
+    '/dashboard',
+    '/registration'
 ];
 
 export default function(app) { //handle all react.js routes

@@ -1,6 +1,7 @@
 import jwt from 'jsonwebtoken';
 import config from './../../config';
 import crypto from 'crypto';
+import generatePassword from 'password-generator';
 
 const service = {
 
@@ -25,6 +26,10 @@ const service = {
         hash.update(data);
 
         return hash.digest('hex');
+    },
+
+    generateSecurePassword: () => {
+        return generatePassword(10, false);
     }
 };
 

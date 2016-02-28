@@ -33,8 +33,7 @@ export default function(req, res) {
                 }
 
                 const hash = authService.generateHash(password);
-
-                if (user.hashedPassword !== hash) {
+                if (user.password !== hash) {
                     errors.collect('user', VALIDATION_MESSAGES.INCORRECT_CREDENTIALS);
                     return;
                 }

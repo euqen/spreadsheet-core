@@ -20,6 +20,7 @@ System.config({
     "bootstrap": "github:twbs/bootstrap@3.3.6",
     "bootstrap-material-design": "npm:bootstrap-material-design@0.5.8",
     "core-js": "npm:core-js@1.2.6",
+    "driftyco/ionicons": "github:driftyco/ionicons@2.0.1",
     "flux": "npm:flux@2.1.1",
     "jquery": "npm:jquery@2.2.0",
     "marcuswestin/store.js": "github:marcuswestin/store.js@1.3.20",

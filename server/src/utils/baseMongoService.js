@@ -15,7 +15,7 @@ export default class BaseMongoService {
                     return null;
                 }
 
-                return docs[0];
+                return docs[0].toObject();
             });
     }
 
@@ -30,7 +30,7 @@ export default class BaseMongoService {
                     updateFunc(doc);
                 }
 
-                return this.collection.update(query, doc).then(() => doc);
+                return this.collection.update(query, doc).then(() => doc.toObject());
             });
     }
 

@@ -1,0 +1,20 @@
+{
+  "name": "spreadsheet-core",
+  "version": "1.0.0",
+  "description": "npm, jspm, node v4 or higher, mongodb, gulp, babel-node \t$ sudo npm install babel@5.8.3",
+  "main": "index.js",
+  "scripts": {
+    "start": "NODE_ENV=development babel-node ./server/src/app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/euqen/spreadsheet-core.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/euqen/spreadsheet-core/issues"
+  },
+  "homepage": "https://github.com/euqen/spreadsheet-core#readme"
+}

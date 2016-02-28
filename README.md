@@ -8,8 +8,8 @@
 	$ cd server/src && npm install
 
 ## Run application
-	$ cd server/src
-	$ NODE_ENV=development babel-node app.js
+	$ cd spreadsheet-core
+	$ npm start
 	
 ## Build application
 	$ cd client

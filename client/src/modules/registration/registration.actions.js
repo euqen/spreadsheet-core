@@ -1,3 +1,15 @@
-/**
- * Created by euqen on 28.2.16.
- */
+'use strict';
+
+import dispatcher from './../../infrastructure/dispatcher';
+import api from './../../infrastructure/web.api';
+
+export default class RegistrationActions {
+    static register(data) {
+        return api.post('api/v1/user/create', data)
+            .then(res => {
+                if (!res.hasErrors) {
+                    dispatcher.dispatch({action: 'user.created', data: res});
+                }
+            });
+    }
+}

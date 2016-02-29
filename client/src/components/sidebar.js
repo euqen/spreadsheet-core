@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router';
 
 export default class SideBar extends React.Component {
     render() {
@@ -13,11 +14,29 @@ export default class SideBar extends React.Component {
                 <nav className="navigation">
                     <ul className="list-unstyled">
                         <li className="active">
-                            <a href="index.html"><i className="ion-home"></i> <span className="nav-label">Dashboard</span></a>
+                            <Link to="/dashboard">
+                                <i className="ion-home"></i>
+                                <span className="nav-label">Dashboard</span>
+                            </Link>
                         </li>
-                        <li><a href="typography.html"><i className="ion-person-stalker"></i>Students</a></li>
-                        <li><a href="buttons.html"><i className="ion-person"></i>Teachers</a></li>
-                        <li><a href="icons.html"><i className="ion-calendar"></i>Schedule</a></li>
+                        <li>
+                            <Link to="/users">
+                                <i className="ion-person-stalker"></i>
+                                <span className="nav-label">Users</span>
+                            </Link>
+                        </li>
+                        <li>
+                            <Link to="/schedule">
+                                <i className="ion-calendar"></i>
+                                <span className="nav-label">Schedule</span>
+                            </Link>
+                        </li>
+                        <li>
+                            <Link to="/registration">
+                                <i className="ion-calendar"></i>
+                                <span className="nav-label">Registration space</span>
+                            </Link>
+                        </li>
                     </ul>
                 </nav>
             </aside>

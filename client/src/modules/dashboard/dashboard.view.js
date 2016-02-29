@@ -10,10 +10,13 @@ export default class Dashboard extends React.Component {
                 <SideBar />
                 <section className="content">
                     <Header />
-                    <div className="wrapper container-fluid m-t-20">
-                        <DaySchedule title="Today schedule" />
-                        <DaySchedule title="Tomorrow schedule" />
-                    </div>
+                        <div className="wrapper container-fluid m-t-20">
+                            {this.props.children ? this.props.children :
+                                <div>
+                                    <DaySchedule title="Today schedule"/>
+                                    <DaySchedule title="Tomorrow schedule"/>
+                                </div>}
+                        </div>
                 </section>
             </div>
         );

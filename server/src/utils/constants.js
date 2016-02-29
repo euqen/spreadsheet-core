@@ -10,6 +10,7 @@ export default {
     },
 
     VALIDATION_MESSAGES: {
-        INCORRECT_CREDENTIALS : 'Incorrect email or password'
+        INCORRECT_CREDENTIALS : 'Incorrect email or password',
+        USER_EXISTS: 'User already exists'
     }
 }

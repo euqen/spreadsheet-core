@@ -3,6 +3,7 @@ import validator from 'validator';
 import userService from './../../user/user.service';
 import authService from './../../auth/auth.service';
 import {VALIDATION_MESSAGES} from './../../../utils/constants';
+import roles from './../../../internal/roles';
 
 export default function(req, res) {
     return validate((errors) => {
@@ -27,6 +28,8 @@ export default function(req, res) {
             errors.collect('role', 'Please specify user role');
         } else if (role === 'student' && !group) {
              errors.collect('group', 'Please specify student group');
+        } else if (!roles.find(r => r.value === role)) {
+            errors.collect('role', 'Please specify correct user role');
         }
 
         if (errors.hasErrors()) {
@@ -36,7 +39,7 @@ export default function(req, res) {
         return userService.findOne({email: email})
             .then(user => {
                 if (user) {
-                    errors.collect('user', VALIDATION_MESSAGES.INCORRECT_CREDENTIALS);
+                    errors.collect('user', VALIDATION_MESSAGES.USER_EXISTS);
                     return;
                 }
 

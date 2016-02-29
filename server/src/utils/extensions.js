@@ -21,3 +21,12 @@ export function responseMiddlewareExtension(req, res, next) {
 
     next();
 }
+
+export function autorizationMiddleware(req, res, next) {
+    if (req.headers.authorization || req.query.authorization) {
+        next();
+        return;
+    }
+
+    res.sendAuthorizationError();
+}

@@ -52,7 +52,8 @@ export default function(req, res) {
                     middleName: middleName,
                     password: authService.generateHash(password),
                     rawPassword: password,
-                    role: role
+                    role: role,
+                    isRemoved: false
                 }
             });
 

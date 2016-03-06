@@ -1,5 +1,6 @@
 import createValidator from './validators/user.create.validator';
 import service from './user.service';
+import removeValidator from './validators/user.remove.validator';
 
 class UserController {
     create(req, res) {
@@ -16,10 +17,29 @@ class UserController {
     }
 
     list(req, res) {
-        return service.find({})
+        const query = {
+            isRemoved: false
+        };
+
+
+        return service.find(query)
             .then(users => {
                 res.send(users);
             });
+    }
+
+    remove(req, res) {
+        return removeValidator(req, res)
+            .then(data => {
+                if (!data.isValid) {
+                    return;
+                }
+                return service.updateOne({_id: data.result._id}, doc => {
+                   doc.isRemoved = true;
+                });
+            })
+            .then(user => res.send(user))
+            .catch(error => res.status(500).send('err'))
     }
 }
 

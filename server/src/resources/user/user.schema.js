@@ -7,5 +7,6 @@ export default new mongo.Schema({
     group: {type: String, required: false},
     email: {type: String, required: true},
     password: {type: String, required: true},
-    role: {type: String, required: true}
+    role: {type: String, required: true},
+    isRemoved: {type: Boolean, required: true}
 });

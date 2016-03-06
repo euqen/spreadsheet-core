@@ -37,8 +37,7 @@ export default class BaseMongoService {
                 if (doc) {
                     updateFunc(doc);
                 }
-
-                return this.collection.update(query, doc).then(() => doc.toObject());
+                return this.collection.update(query, doc).then(() => doc);
             });
     }
 

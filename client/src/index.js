@@ -6,6 +6,7 @@ import App from './modules/app';
 import LogIn from './modules/log-in/log-in.view';
 import Dashboard from './modules/dashboard/dashboard.view';
 import Registration from './modules/registration/registration.view';
+import Users from './modules/users/users.view';
 
 const Routes = (
   <Router history={browserHistory}>
@@ -13,6 +14,7 @@ const Routes = (
           <IndexRoute component={LogIn}></IndexRoute>
           <Route path="/dashboard" component={Dashboard}>
               <Route path="/registration" component={Registration}></Route>
+              <Route path="/users" component={Users}></Route>
           </Route>
       </Route>
   </Router>

@@ -1,6 +1,6 @@
 import createValidator from './validators/user.create.validator';
-import service from './user.service';
 import removeValidator from './validators/user.remove.validator';
+import service from './user.service';
 
 class UserController {
     create(req, res) {

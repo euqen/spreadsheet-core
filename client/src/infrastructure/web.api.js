@@ -10,7 +10,7 @@ export default class WebAPI {
     }
 
     _parseResponse(response) {
-        let result = response;
+        let result = response.body || {};
         switch (response.statusCode) {
             case 200:
             case 201:
@@ -21,9 +21,9 @@ export default class WebAPI {
                 break;
             case 400:
                 result.hasErrors = true;
-                console.log('Request validation has failed: ' + result.text);
+                console.log('Request validation has failed: ' + response.text);
                 dispatcher.dispatch({
-                    res: response.body,
+                    res: result,
                     action: 'api:validation'
                 });
                 break;

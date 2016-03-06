@@ -1,3 +1,5 @@
+import {pageAccessMiddleware} from './../utils/extensions';
+
 const routes = [
     '/',
     '/about',
@@ -8,8 +10,9 @@ const routes = [
 
 export default function(app) { //handle all react.js routes
     for(let route of routes) {
-        app.get(route, (req, res) => res.render('app.html'));
+        app.get(route, pageAccessMiddleware, (req, res) => res.render('app.html'));
     }
-    // match all except static files and api routes
-    app.get(/^\/(?!api\/v1\/)(?!.*\.).*$/, (req, res) => res.render('404.html'))
+
+    app.get(/^\/(.*\.).*$/, (req, res) => res.status(404).send()); // match static files if not exists
+    app.get(/^\/(?!api\/v1\/).*$/, (req, res) => res.render('404.html')); // match all except api routes
 }

@@ -6,9 +6,9 @@ class AuthController {
         return logInValidator(req, res)
             .then(data => {
                 if (data.isValid) {
-                   const token = service.generateSecureToken(data.result);
-
-                   res.send(token);
+                    const token = service.generateSecureToken(data.result);
+                    req.session.token = token;
+                    res.send({token: token});
                 }
             });
     }

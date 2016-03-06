@@ -43,5 +43,7 @@ export function pageAccessMiddleware(req, res, next) {
 export function globalErrorHandler(err, req, res, next) {
     if (err.name === 'UnauthorizedError') {
         res.status(401).send('invalid token...');
+    } else {
+        res.status(400).send('err');
     }
 }

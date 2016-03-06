@@ -24,10 +24,6 @@ export default class BaseMongoService {
         return model.save()
             .then(doc => {
                 return doc.toObject();
-            })
-            .catch(err => {
-                console.log(err);
-                throw new Error(err.errors);
             });
     }
 

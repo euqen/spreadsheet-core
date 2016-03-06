@@ -1,5 +1,8 @@
 import express from 'express';
-import controller from './user.controller';
+import responsify from './../../utils/responsify';
+import userController from './user.controller';
+
+const controller = responsify(userController);
 const router = express.Router();
 
 router.post('/create', controller.create);

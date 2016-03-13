@@ -117,3 +117,7 @@
     left:50%;
     transform: translate(-50%,-50%);
 }
+
+.btn {
+    margin-right: 3px !important;
+}

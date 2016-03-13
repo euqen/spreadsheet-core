@@ -19,4 +19,8 @@ export default class UserListActions {
                 }
             })
     }
+
+    static getTeachers() {
+        return api.get('api/v1/user', {role: 'teacher'});
+    }
 }

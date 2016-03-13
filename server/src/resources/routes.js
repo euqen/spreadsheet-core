@@ -18,5 +18,6 @@ export default function(app) {
 
     /** Private routes **/
     app.use('/api/v1/user', require('./user'));
+    app.use('/api/v1/schedule', require('./schedule'));
     app.use(globalErrorHandler);
 }

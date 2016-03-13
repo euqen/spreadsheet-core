@@ -11,6 +11,7 @@ export default {
 
     VALIDATION_MESSAGES: {
         INCORRECT_CREDENTIALS : 'Incorrect email or password',
-        USER_EXISTS: 'User already exists'
+        USER_EXISTS: 'User already exists',
+        TEACHER_NOT_EXISTS: 'This teacher does not exists'
     }
 }

@@ -13,8 +13,14 @@ export default class Dashboard extends React.Component {
                         <div className="wrapper container-fluid m-t-20">
                             {this.props.children ? this.props.children :
                                 <div>
-                                    <DaySchedule title="Today schedule"/>
-                                    <DaySchedule title="Tomorrow schedule"/>
+                                    <DaySchedule
+                                        title="Today schedule"
+                                        hideAddForm={true}
+                                    />
+                                    <DaySchedule
+                                        title="Tomorrow schedule"
+                                        hideAddForm={true}
+                                    />
                                 </div>}
                         </div>
                 </section>

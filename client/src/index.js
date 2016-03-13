@@ -7,6 +7,7 @@ import LogIn from './modules/log-in/log-in.view';
 import Dashboard from './modules/dashboard/dashboard.view';
 import Registration from './modules/registration/registration.view';
 import Users from './modules/users/users.view';
+import Schedule from './modules/schedule/schedule.view';
 
 const Routes = (
   <Router history={browserHistory}>
@@ -15,6 +16,7 @@ const Routes = (
           <Route path="/dashboard" component={Dashboard}>
               <Route path="/registration" component={Registration}></Route>
               <Route path="/users" component={Users}></Route>
+              <Route path="/schedule" component={Schedule}></Route>
           </Route>
       </Route>
   </Router>

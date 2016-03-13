@@ -19,6 +19,11 @@ export default {
             isRemoved: false
         };
 
+        if (req.query.role) {
+            query.role = req.query.role;
+        }
+
+
         return service.find(query);
     },
 

@@ -7,6 +7,7 @@ const router = express.Router();
 
 router.post('/create', controller.create);
 router.get('/', controller.list);
+router.get('/current', controller.current);
 router.put('/:id/remove', controller.remove);
 
 export default router;

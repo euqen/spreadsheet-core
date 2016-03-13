@@ -5,10 +5,7 @@ import api from './../../infrastructure/web.api';
 
 export default class UserListActions {
     static getUsers(data) {
-        return api.get('api/v1/user', data)
-            .then(res => {
-                return res;
-            });
+        return api.get('api/v1/user', data);
     }
 
     static removeUser(id) {
@@ -22,5 +19,9 @@ export default class UserListActions {
 
     static getTeachers() {
         return api.get('api/v1/user', {role: 'teacher'});
+    }
+
+    static getCurrentUser() {
+        return api.get('api/v1/user/current');
     }
 }

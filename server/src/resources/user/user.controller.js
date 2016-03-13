@@ -23,7 +23,6 @@ export default {
             query.role = req.query.role;
         }
 
-
         return service.find(query);
     },
 
@@ -37,5 +36,9 @@ export default {
                    doc.isRemoved = true;
                 });
             });
+    },
+
+    current(req, res) {
+        return service.findOne({email: req.user.email});
     }
 }

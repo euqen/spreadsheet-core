@@ -28,3 +28,5 @@ export default class Dashboard extends React.Component {
         );
     }
 }
+
+Dashboard.contextTypes = {user: React.PropTypes.object};

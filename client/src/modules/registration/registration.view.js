@@ -3,39 +3,28 @@
 import React from 'react';
 import {Link} from 'react-router';
 import ErrorCollector from './../../components/error-collector';
-import actions from './registration.actions';
+import dispatcher from './../../infrastructure/dispatcher';
+import bind from './../../infrastructure/store-connector';
 import store from './registration.store';
 
+function getState() {
+    return {
+        user: store.user
+    }
+}
+
+@bind(store, getState)
 export default class Registration extends React.Component {
-    constructor() {
-        super();
-        this.state = {
-            role: 'student'
-        };
+    constructor(props) {
+        super(props);
+
+        this.onValueChanged = this.onValueChanged.bind(this);
+        this.create = this.create.bind(this);
+        this.state = getState();
     }
 
-    onFirstNameChange(event) {
-        this.setState({firstName: event.target.value});
-    }
-
-    onLastNameChange(event) {
-        this.setState({lastName: event.target.value});
-    }
-
-    onMiddleNameChange(event) {
-        this.setState({middleName: event.target.value});
-    }
-
-    onEmailChange(event) {
-        this.setState({email: event.target.value});
-    }
-
-    onRolesChanged(event) {
-        this.setState({role: event.target.value});
-    }
-
-    onGroupChange(event) {
-        this.setState({group: event.target.value});
+    onValueChanged(event) {
+        this.setState({[event.target.name]: event.target.value});
     }
 
     create() {
@@ -48,7 +37,7 @@ export default class Registration extends React.Component {
             group: this.state.group
         };
 
-        return actions.register(data);
+        dispatcher.dispatch({action: 'user.create', user: data})
     }
 
     render() {
@@ -64,51 +53,79 @@ export default class Registration extends React.Component {
                             <div className="col-md-12 col-sm-12 col-xs-12">
                                 <form role="form">
                                     <div className="form-group">
-                                        <label htmlFor="exampleInputEmail1">Email</label>
-                                        <input type="email" className="form-control" id="email"
-                                               placeholder="Enter email" onChange={this.onEmailChange.bind(this)} />
+                                        <label htmlFor="emial">Email</label>
+                                        <input type="email"
+                                               className="form-control"
+                                               id="email"
+                                               placeholder="Enter email"
+                                               name="email"
+                                               onChange={this.onValueChanged} />
                                     </div>
                                     <div className="form-group">
                                         <label htmlFor="firstname">
                                             First Name</label>
-                                        <input type="text" className="form-control" id="firstname"
-                                               placeholder="Fist Name" onChange={this.onFirstNameChange.bind(this)}/>
+                                        <input type="text"
+                                               className="form-control"
+                                               id="firstname"
+                                               placeholder="Fist Name"
+                                               name="firstName"
+                                               onChange={this.onValueChanged} />
                                     </div>
                                     <div className="form-group">
                                         <label htmlFor="middlename">
                                             Middle Name</label>
-                                        <input type="text" className="form-control" id="middlename"
-                                               placeholder="Middle Name" onChange={this.onMiddleNameChange.bind(this)}/>
+                                        <input type="text"
+                                               className="form-control"
+                                               id="middlename"
+                                               placeholder="Middle Name"
+                                               name="middleName"
+                                               onChange={this.onValueChanged} />
                                     </div>
                                     <div className="form-group">
                                         <label htmlFor="lastname">
                                             Last Name
                                         </label>
-                                        <input type="text" className="form-control" id="lastname"
-                                               placeholder="Last Name" onChange={this.onLastNameChange.bind(this)}/>
+                                        <input type="text"
+                                               className="form-control"
+                                               id="lastname"
+                                               placeholder="Last Name"
+                                               name="lastName"
+                                               onChange={this.onValueChanged} />
                                     </div>
                                     <div className="form-group">
                                         <label>Roles</label>
                                         <div className="radio">
                                             <label className="cr-styled" forHtml="manager">
-                                                <input type="radio" id="manager" name="permissions" value="manager"
-                                                       onChange={this.onRolesChanged.bind(this)}/>
+                                                <input type="radio"
+                                                       id="manager"
+                                                       name="permissions"
+                                                       value="manager"
+                                                       name="role"
+                                                       onChange={this.onValueChanged} />
                                                 <i className="fa"></i>
                                                 <span>Manager</span>
                                             </label>
                                         </div>
                                         <div className="radio">
                                             <label className="cr-styled" forHtml="teacher">
-                                                <input type="radio" id="teacher" name="permissions" value="teacher"
-                                                       onChange={this.onRolesChanged.bind(this)}/>
+                                                <input type="radio"
+                                                       id="teacher"
+                                                       name="permissions"
+                                                       value="teacher"
+                                                       name="role"
+                                                       onChange={this.onValueChanged} />
                                                 <i className="fa"></i>
                                                 <span>Teacher</span>
                                             </label>
                                         </div>
                                         <div className="radio">
                                             <label className="cr-styled" forHtml="student">
-                                                <input type="radio" id="student" name="permissions" value="student"
-                                                       onChange={this.onRolesChanged.bind(this)}/>
+                                                <input type="radio"
+                                                       id="student"
+                                                       name="permissions"
+                                                       value="student"
+                                                       name="role"
+                                                       onChange={this.onValueChanged} />
                                                 <i className="fa"></i>
                                                 <span>Student</span>
                                             </label>
@@ -119,11 +136,15 @@ export default class Registration extends React.Component {
                                             <label htmlFor="role">
                                                 Student's group
                                             </label>
-                                            <input type="text" className="form-control" id="group"
-                                                   placeholder="Student's group" onChange={this.onGroupChange.bind(this)}/>
+                                            <input type="text"
+                                                   className="form-control"
+                                                   id="group"
+                                                   placeholder="Student's group"
+                                                   name="group"
+                                                   onChange={this.onValueChanged} />
                                         </div>
                                         : null }
-                                    <button onClick={this.create.bind(this)} type="button" className="btn btn-success pull-right">Create</button>
+                                    <button onClick={this.create} type="button" className="btn btn-success pull-right">Create</button>
                                 </form>
                             </div>
                         </div>

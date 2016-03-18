@@ -4,6 +4,7 @@ System.config({
   transpiler: "babel",
   babelOptions: {
     "optional": [
+      "es7.decorators",
       "runtime",
       "optimisation.modules.system"
     ]
@@ -21,6 +22,7 @@ System.config({
     "bootstrap-material-design": "npm:bootstrap-material-design@0.5.8",
     "core-js": "npm:core-js@1.2.6",
     "driftyco/ionicons": "github:driftyco/ionicons@2.0.1",
+    "events": "npm:events@1.1.0",
     "flux": "npm:flux@2.1.1",
     "jquery": "npm:jquery@2.2.0",
     "marcuswestin/store.js": "github:marcuswestin/store.js@1.3.20",

@@ -1,3 +1,5 @@
+'use strict';
+
 import React from 'react';
 import DaySchedule from './day-schedule.view';
 import scheduleDays from './../../../infrastructure/schedule-days';
@@ -9,8 +11,7 @@ export default class WeekSchedule extends React.Component {
                 {scheduleDays.map((day) => {
                     return <DaySchedule
                         day={day}
-                        teachers={this.props.teachers}
-                        schedule={this.props.schedule}
+                        schedule={this.props.schedule.filter(s => s.day === day.value)}
                         key={day.name}
                     />
                 })}

@@ -1,7 +1,9 @@
+'use strict';
+
 import React from 'react';
 import SideBar from './../../components/sidebar';
 import Header from './../../components/header';
-import DaySchedule from './components/day-schedule.view';
+import DaySchedule from './../schedule/components/day-schedule.view';
 
 export default class Dashboard extends React.Component {
     render() {
@@ -29,4 +31,6 @@ export default class Dashboard extends React.Component {
     }
 }
 
-Dashboard.contextTypes = {user: React.PropTypes.object};
+Dashboard.contextTypes = {
+    user: React.PropTypes.object
+};

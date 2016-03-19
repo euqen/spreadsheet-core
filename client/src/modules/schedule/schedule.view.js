@@ -1,32 +1,29 @@
+'use strict';
+
 import React from 'react';
 import ErrorCollector from './../../components/error-collector';
-import WeekSchedule from './../dashboard/components/week-schedule.view';
-import userActions from './../users/users.actions';
-import actions from './schedule.actions';
+import WeekSchedule from './components/week-schedule.view';
+import store from './schedule.store';
+import bind from './../../infrastructure/store-connector';
+import dispatcher from './../../infrastructure/dispatcher';
 
+function getState() {
+    return {
+        schedule: store.schedule
+    }
+}
+
+@bind(store, getState)
 export default class Schedule extends React.Component {
     constructor() {
         super();
-        this.state = {};
+
+        this.state = getState();
+        console.log(this);
     }
 
-    componentWillMount() {
-        return this.getSchedule()
-            .then(() => this.getTeachers());
-    }
-
-    getTeachers() {
-        return userActions.getTeachers()
-            .then(teachers => {
-                this.setState({teachers: teachers});
-            });
-    }
-
-    getSchedule() {
-        return actions.getSchedule()
-            .then(schedule => {
-                this.setState({schedule: schedule});
-            })
+    componentDidMount() {
+        dispatcher.dispatch({action: 'schedule.retrieve'});
     }
 
     render() {
@@ -34,8 +31,7 @@ export default class Schedule extends React.Component {
             <div>
                 <ErrorCollector />
                 <WeekSchedule
-                    teachers={this.state.teachers}
-                    schedule={this.state.schedule}
+                    schedule={this.props.schedule}
                 />
             </div>
         );

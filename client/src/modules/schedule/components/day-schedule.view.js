@@ -1,12 +1,21 @@
+'use strict';
+
 import React from 'react';
-import actions from './../../schedule/schedule.actions';
+import * as actions from './../../schedule/schedule.actions';
+import dispatcher from './../../../infrastructure/dispatcher';
 
 export default class DaySchedule extends React.Component {
     constructor() {
         super();
 
-        this.state = {
-            showAddForm: false
+        this.onValueChanged = this.onValueChanged.bind(this);
+        this.state = this.getInitState();
+    }
+
+    getInitState() {
+        return {
+            showAddForm: false,
+            schedule: []
         };
     }
 
@@ -14,53 +23,30 @@ export default class DaySchedule extends React.Component {
         this.setState({showAddForm: !this.state.showAddForm});
     }
 
+    onValueChanged(event) {
+        this.setState({[event.target.name]: event.target.value});
+    }
+
     save() {
         const model = {
             day: this.props.day.value,
             time: this.state.time,
             teacher: this.state.teacher,
+            group: this.state.group,
             title: this.state.title,
             type: this.state.type,
             auditory: this.state.auditory
         };
 
-        return actions.save(model);
+        dispatcher.dispatch({action: 'schedule.create', data: model});
     }
 
     componentWillReceiveProps(props) {
-        this.setState({teachers: props.teachers});
-
         if (props.schedule) {
-            this.onScheduleReceived(props.schedule);
+            this.setState({schedule: props.schedule});
         }
-    }
 
-    onScheduleReceived(schedule) {
-        const data = schedule.filter(s => {
-           return s.day === this.props.day.value;
-        });
-
-        this.setState({schedule: data});
-    }
-
-    onTeacherChanged(event) {
-        this.setState({teacher: event.target.value});
-    }
-
-    onTitleChanged(event) {
-        this.setState({title: event.target.value});
-    }
-
-    onTypeChanged(event) {
-        this.setState({type: event.target.value});
-    }
-
-    onTimeChanged(event) {
-        this.setState({time: event.target.value});
-    }
-
-    onAuditoryChanged(event) {
-        this.setState({auditory: event.target.value});
+        this.setState({day: props.day});
     }
 
     render() {
@@ -81,8 +67,8 @@ export default class DaySchedule extends React.Component {
                                     <th>Title</th>
                                     <th>Type</th>
                                     <th>Auditory</th>
-                                    <th>Teacher</th>
-                                    <th >Actions</th>
+                                    <th>{this.context.user.role === 'student' ? 'Teacher' : 'Group'}</th>
+                                    <th>Actions</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -100,26 +86,18 @@ export default class DaySchedule extends React.Component {
                                 {this.state.showAddForm ?
                                 <tr>
                                     <td colSpan="2">
-                                        <input className="form-control" type="text" placeholder="Time" onChange={this.onTimeChanged.bind(this)} />
+                                        <input className="form-control" type="text" placeholder="Time" onChange={this.onValueChanged} />
                                     </td>
                                     <td>
-                                        <input className="form-control" type="text" placeholder="Title" onChange={this.onTitleChanged.bind(this)} />
+                                        <input className="form-control" type="text" placeholder="Title" onChange={this.onValueChanged} />
                                     </td>
                                     <td>
-                                        <input className="form-control" type="text" placeholder="Type" onChange={this.onTypeChanged.bind(this)} />
+                                        <input className="form-control" type="text" placeholder="Type" onChange={this.onValueChanged} />
                                     </td>
                                     <td>
-                                        <input className="form-control" type="text" placeholder="Auditory" onChange={this.onAuditoryChanged.bind(this)} />
+                                        <input className="form-control" type="text" placeholder="Auditory" onChange={this.onValueChanged} />
                                     </td>
-                                    <td>
-                                        <select className="form-control" onChange={this.onTeacherChanged.bind(this)}>
-                                            {this.state.teachers.map((teacher) => {
-                                                return <option key={teacher._id} value={teacher._id}>
-                                                    {`${teacher.firstName} ${teacher.lastName}`}
-                                                </option>
-                                            })}
-                                        </select>
-                                    </td>
+                                    <td></td>
                                     <td>
                                         <button className="btn btn-xs btn-primary" onClick={this.save.bind(this)}>
                                             <i className="ion-checkmark-round"></i>
@@ -142,3 +120,7 @@ export default class DaySchedule extends React.Component {
         );
     }
 }
+
+DaySchedule.contextTypes = {
+    user: React.PropTypes.object
+};

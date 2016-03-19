@@ -1,8 +1,8 @@
-import userActions from './../modules/users/users.actions';
+import * as actions from './../modules/users/users.actions';
 import permissions from './permissions';
 
 export function getContextUser() {
-    return userActions.getCurrentUser()
+    return actions.getCurrentUser()
         .then(user => {
             permissions.extend(user);
             return user;

@@ -1,22 +1,51 @@
 'use strict';
 
+import { browserHistory } from 'react-router';
 import dispatcher from './../../infrastructure/dispatcher';
 import api from './../../infrastructure/web.api';
-import { browserHistory } from 'react-router';
-import store from 'marcuswestin/store.js';
-import view from './users.view';
+import Store from './../../infrastructure/store';
+import * as actions from './users.actions';
 
-class UsersStore {
+class UsersStore extends Store {
     constructor() {
-        this.registerDispatcherEvents()
+        super();
+
+        this.setDefaults();
+        this.registerDispatcherEvents();
     }
 
     registerDispatcherEvents() {
+        dispatcher.on('user.remove', this.onUserRemove.bind(this));
         dispatcher.on('user.removed', this.onUserRemoved.bind(this));
+
+        dispatcher.on('users.retrieve', this.onUsersRetrieve.bind(this));
+        dispatcher.on('users.retrieved', this.onUsersRetrieved.bind(this));
+    }
+
+    setDefaults() {
+        this._users = [];
+    }
+
+    get users() {
+        return this._users;
+    }
+
+    onUserRemove(payload) {
+        return actions.removeUser(payload.userId);
     }
 
     onUserRemoved(payload) {
-        // remove user
+        this._users = this._users.filter(user => user._id !== payload.data._id);
+        this.trigger('changed');
+    }
+
+    onUsersRetrieve() {
+        return actions.getUsers();
+    }
+
+    onUsersRetrieved(payload) {
+        this._users = payload.data;
+        this.trigger('changed');
     }
 
 }

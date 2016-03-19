@@ -1,35 +1,36 @@
 import React from 'react';
-import actions from './users.actions';
+import dispatcher from './../../infrastructure/dispatcher';
+import bind from './../../infrastructure/store-connector';
 import store from './users.store';
 
-export default class UsersList extends React.Component {
-    constructor() {
-        super();
+function getState() {
+    return {
+        users: store.users
+    }
+}
 
-        this.state = {
-            users: []
-        };
+@bind(store, getState)
+export default class UsersList extends React.Component {
+    constructor(props) {
+        super(props);
+
+        this.state = getState();
     }
 
     componentDidMount() {
-        return actions.getUsers()
-            .then(users => {
-                this.setState({users: users});
-            });
+        dispatcher.dispatch({action: 'users.retrieve'});
     }
 
-    onUserRemoved(removedUser) {
-        const users = this.state.users.filter(user => user._id === removedUser._id);
-        this.setState({users: users});
+    componentWillReceiveProps(props) {
+        /** Incoming props changing current state and not vice versa **/
+        this.setState({users: props.users});
+    }
+
+    shouldComponentUpdate(props, state) {
+        return state.users.length !== this.state.users.length;
     }
 
     render() {
-        let users = [];
-        for (let user of this.state.users) {
-            user.id = users.length + 1;
-            users.push(<User data={user} key={user._id} />);
-        }
-
         return (
             <div className="panel panel-default">
                 <div className="panel-heading">
@@ -51,7 +52,8 @@ export default class UsersList extends React.Component {
                                 </tr>
                                 </thead>
                                 <tbody>
-                                    {users}
+                                    {this.state.users.map((user, index) =>
+                                        <User user={user} number={index} key={user._id} />)}
                                 </tbody>
                             </table>
                         </div>
@@ -63,20 +65,19 @@ export default class UsersList extends React.Component {
 }
 
 class User extends React.Component {
-
     removeUser() {
-        return actions.removeUser(this.props.data._id);
+        dispatcher.dispatch({action: 'user.remove', userId: this.props.user._id})
     }
 
     render() {
         return (
             <tr>
-                <td>{this.props.data.id}</td>
-                <td>{this.props.data.email}</td>
-                <td>{this.props.data.firstName}</td>
-                <td>{this.props.data.middleName}</td>
-                <td>{this.props.data.lastName}</td>
-                <td>{this.props.data.role}</td>
+                <td>{this.props.user.id}</td>
+                <td>{this.props.user.email}</td>
+                <td>{this.props.user.firstName}</td>
+                <td>{this.props.user.middleName}</td>
+                <td>{this.props.user.lastName}</td>
+                <td>{this.props.user.role}</td>
                 <td>
                     <button className="btn btn-danger btn-xs" onClick={this.removeUser.bind(this)}>X</button>
                 </td>

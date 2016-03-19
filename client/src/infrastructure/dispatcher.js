@@ -3,7 +3,6 @@
 import {Dispatcher} from 'flux';
 
 class dispatcher {
-
     constructor() {
         this.actions = {};
         this._dispatcher = new Dispatcher();
@@ -12,12 +11,14 @@ class dispatcher {
     }
 
     _registerActions() {
-        this._dispatcher.register((payload) => {
+        return this._dispatcher.register((payload) => {
             const action = payload.action;
             if (this.actions[action]) {
                 const callback = this.actions[action];
                 return callback(payload);
             }
+
+            return true;
         });
     }
 

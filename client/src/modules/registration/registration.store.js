@@ -2,9 +2,9 @@
 
 import dispatcher from './../../infrastructure/dispatcher';
 import api from './../../infrastructure/web.api';
-import { browserHistory } from 'react-router';
 import Store from './../../infrastructure/store';
 import * as actions from './registration.actions';
+import {browserHistory} from 'react-router';
 
 class RegistrationStore extends Store {
     constructor() {
@@ -34,8 +34,11 @@ class RegistrationStore extends Store {
     }
 
     onUserCreated(payload) {
-        this._user = payload;
-        /** On every handler we can call this.trigger() but there is no model here for now which w8 for update **/
+        this._user = payload.data;
+        this.redirect()
+    }
+
+    redirect() {
         browserHistory.push('/users');
     }
 }

@@ -27,6 +27,7 @@ System.config({
     "jquery": "npm:jquery@2.2.0",
     "marcuswestin/store.js": "github:marcuswestin/store.js@1.3.20",
     "materialize-css": "npm:materialize-css@0.97.5",
+    "noty": "npm:noty@2.3.8",
     "react": "npm:react@0.14.7",
     "react-dom": "npm:react-dom@0.14.7",
     "react-router": "npm:react-router@2.0.0",
@@ -506,6 +507,9 @@ System.config({
       "stream": "github:jspm/nodelibs-stream@0.1.0",
       "url": "github:jspm/nodelibs-url@0.1.0",
       "zlib": "github:jspm/nodelibs-zlib@0.1.0"
+    },
+    "npm:noty@2.3.8": {
+      "process": "github:jspm/nodelibs-process@0.1.2"
     },
     "npm:once@1.3.3": {
       "wrappy": "npm:wrappy@1.0.1"

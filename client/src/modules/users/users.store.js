@@ -5,6 +5,7 @@ import dispatcher from './../../infrastructure/dispatcher';
 import api from './../../infrastructure/web.api';
 import Store from './../../infrastructure/store';
 import * as actions from './users.actions';
+import * as notifications from './../../infrastructure/notifications';
 
 class UsersStore extends Store {
     constructor() {
@@ -37,6 +38,7 @@ class UsersStore extends Store {
     onUserRemoved(payload) {
         this._users = this._users.filter(user => user._id !== payload.data._id);
         this.trigger('changed');
+        notifications.success('User successfully removed', {timeout: 10000});
     }
 
     onUsersRetrieve() {

@@ -14,7 +14,13 @@ export default {
     },
 
     list(req, res) {
-        return service.find({});
+        let query = {};
+
+        if (req.query.teacher) {
+            query.teacher = req.query.teacher;
+        }
+
+        return service.find(query);
     },
 
     remove(req, res) {

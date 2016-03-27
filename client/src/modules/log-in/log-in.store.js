@@ -5,7 +5,7 @@ import api from './../../infrastructure/web.api';
 import { browserHistory } from 'react-router';
 import Store from './../../infrastructure/store';
 import localStorge from 'marcuswestin/store.js';
-import actions from './log-in.actions';
+import * as actions from './log-in.actions';
 
 class LogInStore extends Store {
     constructor() {

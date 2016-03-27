@@ -22,7 +22,12 @@ export function removeUser(id) {
 }
 
 export function getTeachers() {
-    return api.get('api/v1/user', {role: 'teacher'});
+    return api.get('api/v1/user', {role: 'teacher'})
+        .then(res => {
+            if (!res.hasErrors) {
+                dispatcher.dispatch({action: 'teachers.retrieved', data: res});
+            }
+        });
 }
 
 export function getCurrentUser() {

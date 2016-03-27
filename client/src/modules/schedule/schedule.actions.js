@@ -15,8 +15,8 @@ export function save(data) {
 export function getSchedule(data) {
     return api.get('api/v1/schedule', data)
         .then(res => {
-                if (!res.hasErrors) {
-                    dispatcher.dispatch({action: 'schedule.retrieved', data: res});
-                }
+            if (!res.hasErrors) {
+                dispatcher.dispatch({action: 'schedule.retrieved', data: res});
+            }
         });
 }

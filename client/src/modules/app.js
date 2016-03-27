@@ -21,7 +21,7 @@ export default class App extends React.Component {
     }
 
     getChildContext() {
-        return {user: this.state.user};
+        return {user: this.state.user, route: this.props.routes};
     }
 
     render() {
@@ -33,4 +33,4 @@ export default class App extends React.Component {
     }
 }
 
-App.childContextTypes = {user: React.PropTypes.object};
+App.childContextTypes = {user: React.PropTypes.object, route: React.PropTypes.array};

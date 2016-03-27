@@ -13,10 +13,10 @@ const Routes = (
   <Router history={browserHistory}>
       <Route path="/" component={App}>
           <IndexRoute component={LogIn}></IndexRoute>
-          <Route path="/dashboard" component={Dashboard}>
-              <Route path="/registration" component={Registration}></Route>
-              <Route path="/users" component={Users}></Route>
-              <Route path="/schedule" component={Schedule}></Route>
+          <Route path="/dashboard" component={Dashboard} name="dashboard">
+              <Route path="/registration" component={Registration} name="registration"></Route>
+              <Route path="/users" component={Users} name="users"></Route>
+              <Route path="/schedule" component={Schedule} name="schedule"></Route>
           </Route>
       </Route>
   </Router>

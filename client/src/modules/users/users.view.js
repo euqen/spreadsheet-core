@@ -34,28 +34,34 @@ export default class UsersList extends React.Component {
         return (
             <div className="panel panel-default">
                 <div className="panel-heading">
-                    <h3 className="panel-title">Users</h3>
+                    <h3 className="panel-title">Registered users</h3>
                 </div>
                 <div className="panel-body">
                     <div className="row">
                         <div className="col-md-12 col-sm-12 col-xs-12">
-                            <table className="table table-hover">
-                                <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>E-Mail</th>
-                                    <th>First Name</th>
-                                    <th>Middle Name</th>
-                                    <th>Last Name</th>
-                                    <th>Role</th>
-                                    <th>Actions</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                    {this.state.users.map((user, index) =>
-                                        <User user={user} number={index} key={user._id} />)}
-                                </tbody>
-                            </table>
+                            {this.state.users.length === 0 ?
+                                <div className="alert alert-warning">
+                                    There are no users found, please add one at least.
+                                </div> :
+                                <table className="table table-hover">
+                                    <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>E-Mail</th>
+                                        <th>First Name</th>
+                                        <th>Middle Name</th>
+                                        <th>Last Name</th>
+                                        <th>Role</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {
+                                        this.state.users.map((user, index) =>
+                                            <User user={user} number={index} key={user._id}/>)
+                                    }
+                                    </tbody>
+                                </table>}
                         </div>
                     </div>
                 </div>

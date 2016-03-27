@@ -45,7 +45,7 @@ export default class SideBar extends React.Component {
                         </li>
                         <li className={route === 'registration' ? 'active' : ''}>
                             <Link to="/registration">
-                                <i className="ion-calendar"></i>
+                                <i className="ion-person-add"></i>
                                 <span className="nav-label">Registration space</span>
                             </Link>
                         </li>

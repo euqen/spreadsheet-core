@@ -7,8 +7,10 @@ export default class SideBar extends React.Component {
             <aside className="left-panel" tabIndex="5001">
                 <div className="logo">
                     <a href="index.html" className="logo-expanded">
-                        <i className="ion-social-buffer"></i>
-                        <span className="nav-label"> BSUIR SCHEDULE</span>
+                        <img src="/assets/img/logo.png" width="48" height="55"/>
+                        <span className="nav-label">
+                            <img src="/assets/img/wording.png" height="55" width="182" alt=""/>
+                        </span>
                     </a>
                 </div>
                 <nav className="navigation">

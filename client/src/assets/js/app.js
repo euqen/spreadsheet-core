@@ -22,7 +22,7 @@
         //on toggle side menu bar
         var $this = this;
         $(document).on('click', '.navbar-toggle', function () {
-            $this.$sideBar.toggleClass('collapsed');
+            $('aside.left-panel').toggleClass('collapsed');
         });
 
         //on menu item clicking

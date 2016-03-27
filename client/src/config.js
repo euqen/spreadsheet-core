@@ -25,6 +25,7 @@ System.config({
     "events": "npm:events@1.1.0",
     "flux": "npm:flux@2.1.1",
     "jquery": "npm:jquery@2.2.0",
+    "nicescroll": "assets/js/nice-scroll.min.js",
     "marcuswestin/store.js": "github:marcuswestin/store.js@1.3.20",
     "materialize-css": "npm:materialize-css@0.97.5",
     "noty": "npm:noty@2.3.8",

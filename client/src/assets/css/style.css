@@ -167,17 +167,22 @@ aside.left-panel.lg + .content {
 /***** 2.1 LOGO *****/
 .logo {
     text-align: center;
-    background-color: #ffffff;
+    /*background-color: #ffffff;*/
     padding: 13px 10px;
 }
 
 .logo-expanded {
     font-size: 20px;
     letter-spacing: .05em;
-    color: #2f353f !important;
+    color: #ffffff;
     font-weight: 700;
     text-transform: uppercase;
 }
+
+.logo-expanded:hover {
+    color: #ffffff;
+}
+
 .logo-expanded i {
     font-size: 24px;
     vertical-align: middle;
@@ -186,7 +191,7 @@ aside.left-panel.lg + .content {
 /******** 2.2 Navigation *******/
 
 .navigation {
-    margin: 50px 0px 20px;
+    margin: 10px 0px 20px;
 }
 
 .navigation > ul > li {

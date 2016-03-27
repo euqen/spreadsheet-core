@@ -17,9 +17,7 @@ function getState() {
 export default class Schedule extends React.Component {
     constructor() {
         super();
-
         this.state = getState();
-        console.log(this);
     }
 
     componentDidMount() {

@@ -2,18 +2,22 @@
 
 import React from 'react';
 import {Link} from 'react-router';
-import logInActions from './log-in.actions';
-import logInStore from './log-in.store';
+import store from './log-in.store';
 import ErrorCollector from './../../components/error-collector';
+import bind from './../../infrastructure/store-connector';
+import dispatcher from './../../infrastructure/dispatcher';
 
+function getState() {
+    return {
+        data: store.data
+    }
+}
+
+@bind(store, getState)
 export default class SignIn extends React.Component {
     constructor() {
         super();
-
-        this.state = {
-            email: null,
-            password: null
-        };
+        this.state = getState();
     }
 
     logIn() {
@@ -22,15 +26,11 @@ export default class SignIn extends React.Component {
             password: this.state.password
         };
 
-        return logInActions.logIn(data);
+        dispatcher.dispatch({action: 'user.log-in', data: data})
     }
 
-    onPasswordChange(event) {
-        this.setState({password: event.target.value});
-    }
-
-    onEmailChange(event) {
-        this.setState({email: event.target.value});
+    onValueChanged(event) {
+        this.setState({[event.target.name]: event.target.value});
     }
 
     render() {
@@ -46,14 +46,14 @@ export default class SignIn extends React.Component {
                             <form role="form">
                                 <div className="form-group">
                                     <label htmlFor="exampleInputEmail1">Email</label>
-                                    <input type="email" className="form-control" id="email"
-                                           placeholder="Enter email" onChange={this.onEmailChange.bind(this)}/>
+                                    <input type="email" className="form-control" id="email" name="email"
+                                           placeholder="Enter email" onChange={this.onValueChanged.bind(this)}/>
                                 </div>
                                 <div className="form-group">
                                     <label htmlFor="exampleInputPassword1">
                                         Password</label>
-                                    <input type="password" className="form-control" id="password"
-                                           placeholder="Password" onChange={this.onPasswordChange.bind(this)}/>
+                                    <input type="password" className="form-control" id="password" name="password"
+                                           placeholder="Password" onChange={this.onValueChanged.bind(this)}/>
                                 </div>
                                 <a className="btn btn-purple float-right" onClick={this.logIn.bind(this)}>Login</a>
                             </form>

@@ -13,17 +13,28 @@ export default class ScheduleFilter extends React.Component {
             groups: []
         };
         this.renderTeachers = this.renderTeachers.bind(this);
+        this.renderGroups = this.renderGroups.bind(this);
     }
 
     componentWillReceiveProps(props) {
         if (props.teachers) {
             this.setState({teachers: props.teachers});
         }
+
+        if (props.groups) {
+            this.setState({groups: props.groups});
+        }
     }
 
     renderTeachers() {
         if (this.state.teachers) {
             return this.state.teachers.map(t => <option key={t._id} value={t._id}>{t.firstName} {t.lastName}</option>);
+        }
+    }
+
+    renderGroups() {
+        if (this.state.groups) {
+            return this.state.groups.map(g => <option key={g._id} value={g._id}>{g.groupNumber}</option>);
         }
     }
 
@@ -92,11 +103,7 @@ export default class ScheduleFilter extends React.Component {
                                         disabled={this.state.groupFilterDisabled}
                                         value={this.state.group}>
                                     <option value="">Select group</option>
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
+                                    {this.renderGroups()}
                                 </select>
                             </div>
                         </div>

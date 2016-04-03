@@ -1,3 +1,5 @@
+'use strict';
+
 import React from 'react';
 import {Link} from 'react-router';
 
@@ -16,12 +18,12 @@ export default class SideBar extends React.Component {
         return (
             <aside className="left-panel" tabIndex="5001">
                 <div className="logo">
-                    <a href="/dashboard" className="logo-expanded">
+                    <Link to="/dashboard" className="logo-expanded">
                         <img src="/assets/img/logo.png" width="48" height="55"/>
                         <span className="nav-label">
                             <img src="/assets/img/wording.png" height="55" width="182" alt=""/>
                         </span>
-                    </a>
+                    </Link>
                 </div>
                 <nav className="navigation">
                     <ul className="list-unstyled">
@@ -47,6 +49,12 @@ export default class SideBar extends React.Component {
                             <Link to="/registration">
                                 <i className="ion-person-add"></i>
                                 <span className="nav-label">Registration space</span>
+                            </Link>
+                        </li>
+                        <li className={route === 'groups' ? 'active' : ''}>
+                            <Link to="/groups">
+                                <i className="ion-person-add"></i>
+                                <span className="nav-label">Groups</span>
                             </Link>
                         </li>
                     </ul>

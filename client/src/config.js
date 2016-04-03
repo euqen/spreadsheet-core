@@ -25,9 +25,10 @@ System.config({
     "events": "npm:events@1.1.0",
     "flux": "npm:flux@2.1.1",
     "jquery": "npm:jquery@2.2.0",
-    "nicescroll": "assets/js/nice-scroll.min.js",
     "marcuswestin/store.js": "github:marcuswestin/store.js@1.3.20",
     "materialize-css": "npm:materialize-css@0.97.5",
+    "moment": "npm:moment@2.12.0",
+    "nicescroll": "assets/js/nice-scroll.min.js",
     "noty": "npm:noty@2.3.8",
     "react": "npm:react@0.14.7",
     "react-dom": "npm:react-dom@0.14.7",
@@ -492,6 +493,9 @@ System.config({
       "fs": "github:jspm/nodelibs-fs@0.1.2",
       "minimist": "npm:minimist@0.0.8",
       "path": "github:jspm/nodelibs-path@0.1.0",
+      "process": "github:jspm/nodelibs-process@0.1.2"
+    },
+    "npm:moment@2.12.0": {
       "process": "github:jspm/nodelibs-process@0.1.2"
     },
     "npm:node-archiver@0.2.0": {

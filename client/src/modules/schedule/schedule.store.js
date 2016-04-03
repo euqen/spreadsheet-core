@@ -5,11 +5,13 @@ import dispatcher from './../../infrastructure/dispatcher';
 import api from './../../infrastructure/web.api';
 import Store from './../../infrastructure/store';
 import * as userActions from './../users/users.actions';
+import * as groupActions from './../groups/groups.actions';
 import * as scheduleActions from './schedule.actions';
 
-class ScheduleStore extends Store {
+export default class ScheduleStore extends Store {
     constructor() {
         super();
+
         this.setDefaults();
         this.registerDispatcherEvents();
     }
@@ -18,8 +20,12 @@ class ScheduleStore extends Store {
         dispatcher.on('schedule.create', this.onScheduleCreate.bind(this));
         dispatcher.on('schedule.retrieve', this.onScheduleRetrieve.bind(this));
         dispatcher.on('schedule.retrieved', this.onScheduleRetrieved.bind(this));
+
         dispatcher.on('teachers.retrieve', this.onTeachersRetrieve.bind(this));
         dispatcher.on('teachers.retrieved', this.onTeachersRetrieved.bind(this));
+
+        dispatcher.on('groups.retrieve', this.onGroupsRetrieve.bind(this));
+        dispatcher.on('groups.retrieved', this.onGroupsRetrieved.bind(this));
     }
 
     setDefaults() {
@@ -60,6 +66,15 @@ class ScheduleStore extends Store {
         return userActions.getTeachers();
     }
 
+    onGroupsRetrieve() {
+        return groupActions.getGroups();
+    }
+
+    onGroupsRetrieved(payload) {
+        this._groups = payload.data;
+        this.trigger('changed');
+    }
+
     onScheduleRetrieve(payload) {
         this._teacher = payload.data.teacher; // filter by teacher
         this._group = payload.data.group; //filter by group;
@@ -81,5 +96,3 @@ class ScheduleStore extends Store {
         this.trigger('changed');
     }
 }
-
-export default new ScheduleStore();

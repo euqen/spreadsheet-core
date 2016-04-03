@@ -7,9 +7,10 @@ import Store from './../../infrastructure/store';
 import localStorge from 'marcuswestin/store.js';
 import * as actions from './log-in.actions';
 
-class LogInStore extends Store {
+export default class LogInStore extends Store {
     constructor() {
         super();
+
         this.setDefaults();
         this.registerDispatcherEvents();
     }
@@ -39,5 +40,3 @@ class LogInStore extends Store {
     }
 
 }
-
-export default new LogInStore();

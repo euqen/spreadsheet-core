@@ -7,6 +7,7 @@ import scheduleDays from './../../../infrastructure/schedule-days';
 export default class WeekSchedule extends React.Component {
     constructor() {
         super();
+
         this.state = {};
         this.renderWeekSchedule = this.renderWeekSchedule.bind(this);
     }

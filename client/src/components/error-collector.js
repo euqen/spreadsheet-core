@@ -23,6 +23,12 @@ export default class ErrorCollector extends React.Component {
         this.setState({errors: []});
     }
 
+    componentWillUnmount() {
+        dispatcher.off('api:validation');
+        dispatcher.off('api:error');
+        dispatcher.off('api:response');
+    }
+
     render() {
         let errors = [];
 

@@ -7,23 +7,24 @@ export default function bind(store, getState) {
                 super(props);
 
                 this.handleStoreChanged = this.handleStoreChanged.bind(this);
-                this.state = getState(props);
+                this.store = new store();
+                this.state = getState(this.store);
             }
 
             componentWillMount() {
-                store.subscribe(this.handleStoreChanged)
+                this.store.subscribe(this.handleStoreChanged)
             }
 
             componentWillReceiveProps(nextProps) {
-                this.setState(getState(nextProps));
+                this.setState(getState(this.store));
             }
 
             componentWillUnmount() {
-                store.unsubscribe(this.handleStoreChanged)
+                this.store.unsubscribe(this.handleStoreChanged)
             }
 
             handleStoreChanged() {
-                this.setState(getState(this.props));
+                this.setState(getState(this.store));
             }
 
             render() {

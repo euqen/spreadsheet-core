@@ -7,9 +7,9 @@ import ErrorCollector from './../../components/error-collector';
 import bind from './../../infrastructure/store-connector';
 import dispatcher from './../../infrastructure/dispatcher';
 
-function getState() {
+function getState(props) {
     return {
-        data: store.data
+        data: props.data
     }
 }
 
@@ -17,7 +17,10 @@ function getState() {
 export default class SignIn extends React.Component {
     constructor() {
         super();
-        this.state = getState();
+
+        this.state = {
+            data: {}
+        };
     }
 
     logIn() {

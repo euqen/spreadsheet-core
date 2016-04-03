@@ -3,9 +3,9 @@ import dispatcher from './../../infrastructure/dispatcher';
 import bind from './../../infrastructure/store-connector';
 import store from './users.store';
 
-function getState() {
+function getState(props) {
     return {
-        users: store.users
+        users: props.users
     }
 }
 
@@ -14,7 +14,9 @@ export default class UsersList extends React.Component {
     constructor(props) {
         super(props);
 
-        this.state = getState();
+        this.state = {
+            users: []
+        };
     }
 
     componentDidMount() {

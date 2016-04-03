@@ -7,8 +7,9 @@ import dispatcher from './../../../infrastructure/dispatcher';
 export default class DaySchedule extends React.Component {
     constructor() {
         super();
-        this.onValueChanged = this.onValueChanged.bind(this);
+
         this.state = this.getInitState();
+        this.onValueChanged = this.onValueChanged.bind(this);
     }
 
     getInitState() {

@@ -8,13 +8,13 @@ import bind from './../../infrastructure/store-connector';
 import dispatcher from './../../infrastructure/dispatcher';
 import ScheduleFilter from './components/schedule.filter.view';
 
-function getState() {
+function getState(props) {
     return {
-        schedule: store.schedule,
-        teachers: store.teachers,
-        groups: store.groups,
-        group: store.group,
-        teacher: store.teacher
+        schedule: props.schedule,
+        teachers: props.teachers,
+        groups: props.groups,
+        group: props.group,
+        teacher: props.teacher
     }
 }
 
@@ -22,12 +22,19 @@ function getState() {
 export default class Schedule extends React.Component {
     constructor() {
         super();
-        this.state = getState();
+        this.state = {
+            schedule: [],
+            teachers: [],
+            groups: [],
+            group: {},
+            teacher: {}
+        }
     }
 
     componentDidMount() {
         dispatcher.dispatch({action: 'schedule.retrieve', data: {}});
         dispatcher.dispatch({action: 'teachers.retrieve'});
+        dispatcher.dispatch({action: 'groups.retrieve'});
     }
 
     render() {

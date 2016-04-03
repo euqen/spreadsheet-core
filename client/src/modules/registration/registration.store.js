@@ -6,7 +6,7 @@ import Store from './../../infrastructure/store';
 import * as actions from './registration.actions';
 import {browserHistory} from 'react-router';
 
-class RegistrationStore extends Store {
+export default class RegistrationStore extends Store {
     constructor() {
         super();
 
@@ -39,8 +39,6 @@ class RegistrationStore extends Store {
     }
 
     redirect() {
-        browserHistory.push('/users');
+        browserHistory.goBack();
     }
 }
-
-export default new RegistrationStore();

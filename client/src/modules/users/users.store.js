@@ -7,7 +7,7 @@ import Store from './../../infrastructure/store';
 import * as actions from './users.actions';
 import * as notifications from './../../infrastructure/notifications';
 
-class UsersStore extends Store {
+export default class UsersStore extends Store {
     constructor() {
         super();
 
@@ -51,5 +51,3 @@ class UsersStore extends Store {
     }
 
 }
-
-export default new UsersStore();

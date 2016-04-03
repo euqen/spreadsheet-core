@@ -7,9 +7,9 @@ import dispatcher from './../../infrastructure/dispatcher';
 import bind from './../../infrastructure/store-connector';
 import store from './registration.store';
 
-function getState() {
+function getState(props) {
     return {
-        user: store.user
+        user: props.user
     }
 }
 
@@ -18,9 +18,12 @@ export default class Registration extends React.Component {
     constructor(props) {
         super(props);
 
+        this.state = {
+            user: {}
+        };
+
         this.onValueChanged = this.onValueChanged.bind(this);
         this.create = this.create.bind(this);
-        this.state = getState();
     }
 
     onValueChanged(event) {

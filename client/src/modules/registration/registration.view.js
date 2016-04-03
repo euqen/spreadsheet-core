@@ -59,7 +59,8 @@ const additionalConstants = {
 
 function getState(props) {
     return {
-        user: props.user
+        user: props.user,
+        groups: props.groups
     }
 }
 
@@ -69,16 +70,35 @@ export default class Registration extends React.Component {
         super(props);
 
         this.state = {
-            user: {}
+            user: {},
+            groups: []
         };
 
         this.onValueChanged = this.onValueChanged.bind(this);
         this.create = this.create.bind(this);
+        this.renderGroups = this.renderGroups.bind(this);
+
         this.state.localizationService = new LocalizationService(additionalConstants);
+    }
+
+    componentDidMount() {
+        dispatcher.dispatch({action: 'groups.retrieve'});
+    }
+
+    componentWillReceiveProps(props) {
+        if (props.groups) {
+            this.setState({groups: props.groups});
+        }
     }
 
     onValueChanged(event) {
         this.setState({[event.target.name]: event.target.value});
+    }
+
+    renderGroups() {
+        if (this.state.groups) {
+            return this.state.groups.map(g => <option key={g._id} value={g._id}>{g.groupNumber}</option>);
+        }
     }
 
     create() {
@@ -190,12 +210,12 @@ export default class Registration extends React.Component {
                                             <label htmlFor="role">
                                                 <Translate content="studentsGroup" />
                                             </label>
-                                            <input type="text"
-                                                   className="form-control"
-                                                   id="group"
-                                                   placeholder="Student's group"
-                                                   name="group"
-                                                   onChange={this.onValueChanged} />
+                                            <select className="form-control"
+                                                    onChange={this.onValueChanged.bind(this)}
+                                                    name="group">
+                                                <option value="">Select group</option>
+                                                {this.renderGroups()}
+                                            </select>
                                         </div>
                                         : null }
                                     <button onClick={this.create} type="button" className="btn btn-success pull-right"><Translate content="create" /></button>

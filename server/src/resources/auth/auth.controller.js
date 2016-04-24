@@ -10,7 +10,7 @@ export default {
                     return userService.findOne({email: data.result.email})
                         .then((user) => {
                             const token = service.generateSecureToken(user);
-                            req.session.token = token;
+                            req.session ? req.session.token = token : req.session = {token: token};
 
                             return {token: token};
                         });

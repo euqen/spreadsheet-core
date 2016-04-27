@@ -2,6 +2,28 @@
 
 import React from 'react';
 import {Link} from 'react-router';
+import counterpart from 'counterpart';
+import Translate from 'react-translate-component';
+
+counterpart.registerTranslations('en', {
+    sections: {
+        dashboard: "Dashboard",
+        users: "Users",
+        schedule: "Schedule",
+        registrationSpace: "Registration space",
+        groups: "Groups"
+    }
+});
+
+counterpart.registerTranslations('ru', {
+    sections: {
+        dashboard: "Личный кабинет",
+        users: "Пользователи",
+        schedule: "Расписание",
+        registrationSpace: "Регистрация",
+        groups: "Группы"
+    }
+});
 
 export default class SideBar extends React.Component {
     constructor() {
@@ -30,31 +52,31 @@ export default class SideBar extends React.Component {
                         <li className={route === 'dashboard' ? 'active' : ''}>
                             <Link to="/dashboard">
                                 <i className="ion-home"></i>
-                                <span className="nav-label">Dashboard</span>
+                                <span className="nav-label"><Translate content="sections.dashboard" /></span>
                             </Link>
                         </li>
                         <li className={route === 'users' ? 'active' : ''}>
                             <Link to="/users">
                                 <i className="ion-person-stalker"></i>
-                                <span className="nav-label">Users</span>
+                                <span className="nav-label"><Translate content="sections.users" /></span>
                             </Link>
                         </li>
                         <li className={route === 'schedule' ? 'active' : ''}>
                             <Link to="/schedule">
                                 <i className="ion-calendar"></i>
-                                <span className="nav-label">Schedule</span>
+                                <span className="nav-label"><Translate content="sections.schedule" /></span>
                             </Link>
                         </li>
                         <li className={route === 'registration' ? 'active' : ''}>
                             <Link to="/registration">
                                 <i className="ion-person-add"></i>
-                                <span className="nav-label">Registration space</span>
+                                <span className="nav-label"><Translate content="sections.registrationSpace" /></span>
                             </Link>
                         </li>
                         <li className={route === 'groups' ? 'active' : ''}>
                             <Link to="/groups">
                                 <i className="ion-person-add"></i>
-                                <span className="nav-label">Groups</span>
+                                <span className="nav-label"><Translate content="sections.groups" /></span>
                             </Link>
                         </li>
                     </ul>

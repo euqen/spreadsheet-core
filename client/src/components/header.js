@@ -1,4 +1,23 @@
 import React from 'react';
+import LocalSwitcher from './locale-switcher';
+import counterpart from 'counterpart';
+import Translate from 'react-translate-component';
+
+counterpart.registerTranslations('en', {
+    dropdownMenu: {
+        profile: 'Profile',
+        settings: 'Settings',
+        logout: 'Logout'
+    }
+});
+
+counterpart.registerTranslations('ru', {
+    dropdownMenu: {
+        profile: 'Профиль',
+        settings: 'Настройки',
+        logout: 'Выход'
+    }
+});
 
 export default class Header extends React.Component {
     render() {
@@ -19,11 +38,7 @@ export default class Header extends React.Component {
                 <nav className=" navbar-default" role="navigation">
                     <ul className="nav navbar-nav hidden-xs">
                         <li className="dropdown">
-                            <a data-toggle="dropdown" className="dropdown-toggle" href="#">English
-                                <span className="caret"></span></a>
-                            <ul role="menu" className="dropdown-menu">
-                                <li><a href="#">Russian</a></li>
-                            </ul>
+                            <LocalSwitcher />
                         </li>
                     </ul>
                     <ul className="nav navbar-nav navbar-right top-menu top-right-menu">
@@ -40,9 +55,24 @@ export default class Header extends React.Component {
                                 <span className="username">John Deo </span> <span className="caret"></span>
                             </a>
                             <ul className="dropdown-menu pro-menu fadeInUp animated" tabIndex="5003">
-                                <li><a href="profile.html"><i className="fa fa-briefcase"></i>Profile</a></li>
-                                <li><a href="#"><i className="fa fa-cog"></i> Settings</a></li>
-                                <li><a href="#"><i className="fa fa-sign-out"></i> Log Out</a></li>
+                                <li>
+                                    <a href="profile.html">
+                                        <i className="fa fa-briefcase"></i>
+                                        <Translate content="dropdownMenu.profile" />
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <i className="fa fa-cog"></i>
+                                        <Translate content="dropdownMenu.settings" />
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <i className="fa fa-sign-out"></i>
+                                        <Translate content="dropdownMenu.logout" />
+                                    </a>
+                                </li>
                             </ul>
                         </li>
                     </ul>

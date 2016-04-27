@@ -4,6 +4,18 @@ import React from 'react';
 import SideBar from './../../components/sidebar';
 import Header from './../../components/header';
 import DaySchedule from './../schedule/components/day-schedule.view';
+import counterpart from 'counterpart';
+import Translate from 'react-translate-component';
+
+counterpart.registerTranslations('en', {
+    titleTodaySchedule: "Today Schedule",
+    titleTomorrowSchedule: "Tomorrow Schedule"
+});
+
+counterpart.registerTranslations('ru', {
+    titleTodaySchedule: "Расписание на сегодня",
+    titleTomorrowSchedule: "Расписание на завтра"
+});
 
 export default class Dashboard extends React.Component {
     render() {
@@ -16,11 +28,11 @@ export default class Dashboard extends React.Component {
                             {this.props.children ? this.props.children :
                                 <div>
                                     <DaySchedule
-                                        title="Today schedule"
+                                        title=<Translate content="titleTodaySchedule" />
                                         hideAddForm={true}
                                     />
                                     <DaySchedule
-                                        title="Tomorrow schedule"
+                                        title=<Translate content="titleTomorrowSchedule" />
                                         hideAddForm={true}
                                     />
                                 </div>}

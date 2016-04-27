@@ -3,6 +3,26 @@ import dispatcher from './../../infrastructure/dispatcher';
 import store from './groups.store';
 import ErrorCollector from './../../components/error-collector';
 import bind from './../../infrastructure/store-connector';
+import counterpart from 'counterpart';
+import Translate from 'react-translate-component';
+
+counterpart.registerTranslations('en', {
+    group: "Group",
+    create: "Create",
+    edit: "Edit",
+    groupNumber: "Group Number",
+    save: "Save",
+    enterGroupNumber: "Enter group number"
+});
+
+counterpart.registerTranslations('ru', {
+    group: "группу",
+    create: "Создать",
+    edit: "Изменить",
+    groupNumber: "Номер группы",
+    save: "Сохранить",
+    enterGroupNumber: "Введите номер группы"
+});
 
 function getState(props) {
     return {
@@ -50,7 +70,7 @@ export default class GroupDetails extends React.Component {
                 <div className="portlet">
                     <div className="portlet-heading">
                         <h3 className="portlet-title text-dark text-uppercase">
-                            {this.state.isNew ? 'Create' : 'Edit'} Group
+                            {this.state.isNew ? <Translate content="create" /> : <Translate content="edit" />} <Translate content="group" />
                         </h3>
                         <div className="portlet-widgets">
                             <a href="javascript:;" data-toggle="reload"><i className="ion-refresh"></i></a>
@@ -63,7 +83,7 @@ export default class GroupDetails extends React.Component {
                     <div id="portlet2" className="panel-collapse collapse in">
                         <div className="portlet-body">
                             <div className="form-group">
-                                <label htmlFor="emial">Group Number</label>
+                                <label htmlFor="emial"><Translate content="groupNumber" /></label>
                                 <input type="text"
                                        className="form-control"
                                        id="groupNumber"
@@ -73,7 +93,7 @@ export default class GroupDetails extends React.Component {
                                        onChange={this.onValueChanged.bind(this)} />
                             </div>
                             <div className="form-group">
-                                <button onClick={this.save.bind(this)} type="button" className="btn btn-success pull-right">Save</button>
+                                <button onClick={this.save.bind(this)} type="button" className="btn btn-success pull-right"><Translate content="save" /></button>
                             </div>
                             <div className="clear"></div>
                         </div>

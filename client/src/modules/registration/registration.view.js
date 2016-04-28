@@ -41,6 +41,21 @@ counterpart.registerTranslations('ru', {
     create: "Создать"
 });
 
+const additionalConstants = {
+    en: {
+        enterEmail: "Enter email",
+        firstName: "First Name",
+        middleName: "Middle Name",
+        lastName: "Last Name"
+    },
+    ru: {
+        enterEmail: "Введите email",
+        firstName: "Имя",
+        middleName: "Отчество",
+        lastName: "Фамилия",
+    }
+};
+
 function getState(props) {
     return {
         user: props.user
@@ -94,7 +109,7 @@ export default class Registration extends React.Component {
                                         <input type="email"
                                                className="form-control"
                                                id="email"
-                                               placeholder="Enter email"
+                                               placeholder={additionalConstants[counterpart.getLocale()].enterEmail}
                                                name="email"
                                                onChange={this.onValueChanged} />
                                     </div>
@@ -104,7 +119,7 @@ export default class Registration extends React.Component {
                                         <input type="text"
                                                className="form-control"
                                                id="firstname"
-                                               placeholder="Fist Name"
+                                               placeholder={additionalConstants[counterpart.getLocale()].firstName}
                                                name="firstName"
                                                onChange={this.onValueChanged} />
                                     </div>
@@ -114,7 +129,7 @@ export default class Registration extends React.Component {
                                         <input type="text"
                                                className="form-control"
                                                id="middlename"
-                                               placeholder="Middle Name"
+                                               placeholder={additionalConstants[counterpart.getLocale()].middleName}
                                                name="middleName"
                                                onChange={this.onValueChanged} />
                                     </div>
@@ -125,7 +140,7 @@ export default class Registration extends React.Component {
                                         <input type="text"
                                                className="form-control"
                                                id="lastname"
-                                               placeholder="Last Name"
+                                               placeholder={additionalConstants[counterpart.getLocale()].lastName}
                                                name="lastName"
                                                onChange={this.onValueChanged} />
                                     </div>

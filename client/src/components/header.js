@@ -7,7 +7,8 @@ counterpart.registerTranslations('en', {
     dropdownMenu: {
         profile: 'Profile',
         settings: 'Settings',
-        logout: 'Logout'
+        logout: 'Logout',
+        search: 'Search...'
     }
 });
 
@@ -15,9 +16,19 @@ counterpart.registerTranslations('ru', {
     dropdownMenu: {
         profile: 'Профиль',
         settings: 'Настройки',
-        logout: 'Выход'
+        logout: 'Выход',
+        seacrh: 'Поиск'
     }
 });
+
+const additionalConstants = {
+    en: {
+        search: "Search..."
+    },
+    ru: {
+        search: "Поиск..."
+    }
+};
 
 export default class Header extends React.Component {
     render() {
@@ -31,15 +42,13 @@ export default class Header extends React.Component {
                 </button>
 
                 <form role="search" className="navbar-left app-search pull-left hidden-xs">
-                    <input type="text" placeholder="Search..." className="form-control"/>
+                    <input type="text" placeholder={additionalConstants[counterpart.getLocale()].search} className="form-control"/>
                     <a href=""><i className="fa fa-search"></i></a>
                 </form>
 
                 <nav className=" navbar-default" role="navigation">
                     <ul className="nav navbar-nav hidden-xs">
-                        <li className="dropdown">
                             <LocalSwitcher />
-                        </li>
                     </ul>
                     <ul className="nav navbar-nav navbar-right top-menu top-right-menu">
                         <li className="dropdown">

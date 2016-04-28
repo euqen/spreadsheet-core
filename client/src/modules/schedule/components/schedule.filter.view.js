@@ -11,8 +11,6 @@ counterpart.registerTranslations('en', {
     scheduleFilter: "Schedule Filter",
     filterByTeacher: "Filter by teacher",
     filterByGroup: "Filter by group",
-    selectGroup: "Select group",
-    selectTeacher: "Select teacher",
     applyFilters: "Apply filters"
 });
 
@@ -20,10 +18,19 @@ counterpart.registerTranslations('ru', {
     scheduleFilter: "Фильтр расписания",
     filterByTeacher: "Фильтровать по преподавателю",
     filterByGroup: "Фильтровать по группе",
-    selectTeacher: "Выбрать преподавателя",
-    selectGroup: "Выбрать группу",
     applyFilters: "Применить фильтры"
 });
+
+const additionalConstants = {
+    en: {
+        selectGroup: "Select group",
+        selectTeacher: "Select teacher"
+    },
+    ru: {
+        selectTeacher: "Выбрать преподавателя",
+        selectGroup: "Выбрать группу"
+    }
+};
 
 export default class ScheduleFilter extends React.Component {
     constructor() {
@@ -109,7 +116,7 @@ export default class ScheduleFilter extends React.Component {
                                         onChange={this.onTeacherSelectChanged.bind(this)}
                                         disabled={this.state.teacherFilterDisabled}
                                         value={this.state.teacher}>
-                                    <option value=""><Translate content="selectTeacher" /></option>
+                                     <option value="">{additionalConstants[counterpart.getLocale()].selectTeacher}</option>
                                     {this.renderTeachers()}
                                 </select>
                             </div>
@@ -122,7 +129,7 @@ export default class ScheduleFilter extends React.Component {
                                         onChange={this.onGroupSelectChanged.bind(this)}
                                         disabled={this.state.groupFilterDisabled}
                                         value={this.state.group}>
-                                    <option value=""><Translate content="selectGroup" /></option>
+                                    <option value="">{additionalConstants[counterpart.getLocale()].selectGroup}</option>
                                     {this.renderGroups()}
                                 </select>
                             </div>

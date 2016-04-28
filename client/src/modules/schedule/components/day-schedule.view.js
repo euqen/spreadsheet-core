@@ -14,7 +14,14 @@ counterpart.registerTranslations('en', {
     teacher: "Teacher",
     group: "Group",
     actions: "Actions",
-    addNewTrainingActivity: "Add new training activity"
+    addNewTrainingActivity: "Add new training activity",
+    Monday: "Monday",
+    Tuesday: "Tuesday",
+    Wednesday: "Wednesday",
+    Thursday: "Thursday",
+    Friday: "Friday",
+    Sunday: "Sunday",
+    Saturday: "Saturday"
 });
 
 counterpart.registerTranslations('ru', {
@@ -25,8 +32,30 @@ counterpart.registerTranslations('ru', {
     teacher: "Преподаватель",
     group: "Группа",
     actions: "Действия",
-    addNewTrainingActivity: "Добавить новое учебное занятие"
+    addNewTrainingActivity: "Добавить новое учебное занятие",
+    Monday: "Понедельник",
+    Tuesday: "Вторник",
+    Wednesday: "Среда",
+    Thursday: "Четверг",
+    Friday: "Пятница",
+    Sunday: "Суббота",
+    Saturday: "Воскресение"
 });
+
+const additionalConstants = {
+    en: {
+        time: "Time",
+        title: "Title",
+        type: "Type",
+        auditory: "Auditory"
+    },
+    ru: {
+        time: "Время",
+        title: "Заголовок",
+        type: "Тип",
+        auditory: "Аудитория",
+    }
+};
 
 export default class DaySchedule extends React.Component {
     constructor() {
@@ -77,7 +106,7 @@ export default class DaySchedule extends React.Component {
         return (
             <div className="panel panel-default">
                 <div className="panel-heading">
-                    <h3 className="panel-title">{this.props.title || this.props.day.name}</h3>
+                    <h3 className="panel-title">{this.props.title || <Translate content={this.props.day.name} />}</h3>
                 </div>
                 <div className="panel-body">
                     <div className="row">
@@ -111,16 +140,16 @@ export default class DaySchedule extends React.Component {
                                 {this.state.showAddForm ?
                                 <tr>
                                     <td colSpan="2">
-                                        <input className="form-control" type="text" placeholder="Time" onChange={this.onValueChanged} />
+                                        <input className="form-control" type="text" placeholder={additionalConstants[counterpart.getLocale()].time} onChange={this.onValueChanged} />
                                     </td>
                                     <td>
-                                        <input className="form-control" type="text" placeholder="Title" onChange={this.onValueChanged} />
+                                        <input className="form-control" type="text" placeholder={additionalConstants[counterpart.getLocale()].title} onChange={this.onValueChanged} />
                                     </td>
                                     <td>
-                                        <input className="form-control" type="text" placeholder="Type" onChange={this.onValueChanged} />
+                                        <input className="form-control" type="text" placeholder={additionalConstants[counterpart.getLocale()].type} onChange={this.onValueChanged} />
                                     </td>
                                     <td>
-                                        <input className="form-control" type="text" placeholder="Auditory" onChange={this.onValueChanged} />
+                                        <input className="form-control" type="text" placeholder={additionalConstants[counterpart.getLocale()].auditory} onChange={this.onValueChanged} />
                                     </td>
                                     <td></td>
                                     <td>

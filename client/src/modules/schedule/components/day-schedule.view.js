@@ -3,6 +3,30 @@
 import React from 'react';
 import * as actions from './../../schedule/schedule.actions';
 import dispatcher from './../../../infrastructure/dispatcher';
+import counterpart from 'counterpart';
+import Translate from 'react-translate-component';
+
+counterpart.registerTranslations('en', {
+    time: "Time",
+    title: "Title",
+    type: "Type",
+    auditory: "Auditory",
+    teacher: "Teacher",
+    group: "Group",
+    actions: "Actions",
+    addNewTrainingActivity: "Add new training activity"
+});
+
+counterpart.registerTranslations('ru', {
+    time: "Время",
+    title: "Заголовок",
+    type: "Тип",
+    auditory: "Аудитория",
+    teacher: "Преподаватель",
+    group: "Группа",
+    actions: "Действия",
+    addNewTrainingActivity: "Добавить новое учебное занятие"
+});
 
 export default class DaySchedule extends React.Component {
     constructor() {
@@ -63,12 +87,13 @@ export default class DaySchedule extends React.Component {
                                 <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Time</th>
-                                    <th>Title</th>
-                                    <th>Type</th>
-                                    <th>Auditory</th>
-                                    <th>{this.context.user.role === 'student' ? 'Teacher' : 'Group'}</th>
-                                    <th>Actions</th>
+                                    <th><Translate content="time" /></th>
+                                    <th><Translate content="title" /></th>
+                                    <th><Translate content="type" /></th>
+                                    <th><Translate content="auditory" /></th>
+                                    <th>{this.context.user.role === 'student' ?
+                                        <Translate content="teacher" /> : <Translate content="group" />}</th>
+                                    <th><Translate content="actions" /></th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -111,7 +136,7 @@ export default class DaySchedule extends React.Component {
                             </table> : null}
                             {!this.state.showAddForm && !this.props.hideAddForm ?
                                 <button className="btn btn-sm btn-block btn-default" onClick={this.toggleAddForm.bind(this)}>
-                                    Add new training activity
+                                    <Translate content="addNewTrainingActivity" />
                                 </button> : null }
                         </div>
                     </div>

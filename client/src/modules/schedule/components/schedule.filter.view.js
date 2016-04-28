@@ -4,6 +4,26 @@ import React from 'react';
 import DaySchedule from './day-schedule.view';
 import scheduleDays from './../../../infrastructure/schedule-days';
 import dispatcher from './../../../infrastructure/dispatcher';
+import counterpart from 'counterpart';
+import Translate from 'react-translate-component';
+
+counterpart.registerTranslations('en', {
+    scheduleFilter: "Schedule Filter",
+    filterByTeacher: "Filter by teacher",
+    filterByGroup: "Filter by group",
+    selectGroup: "Select group",
+    selectTeacher: "Select teacher",
+    applyFilters: "Apply filters"
+});
+
+counterpart.registerTranslations('ru', {
+    scheduleFilter: "Фильтр расписания",
+    filterByTeacher: "Фильтровать по преподавателю",
+    filterByGroup: "Фильтровать по группе",
+    selectTeacher: "Выбрать преподавателя",
+    selectGroup: "Выбрать группу",
+    applyFilters: "Применить фильтры"
+});
 
 export default class ScheduleFilter extends React.Component {
     constructor() {
@@ -66,7 +86,7 @@ export default class ScheduleFilter extends React.Component {
             <div className="portlet">
                 <div className="portlet-heading">
                     <h3 className="portlet-title text-dark text-uppercase">
-                        Schedule Filter
+                        <Translate content="scheduleFilter" />
                     </h3>
                     <div className="portlet-widgets">
                         <a onClick={this.resetFilters.bind(this)}>
@@ -83,26 +103,26 @@ export default class ScheduleFilter extends React.Component {
                 <div id="portlet2" className="panel-collapse collapse in">
                     <div className="portlet-body">
                         <div className="form-group">
-                            <label className="col-sm-2 control-label">Filter by teacher</label>
+                            <label className="col-sm-2 control-label"><Translate content="filterByTeacher" /></label>
                             <div className="col-sm-10">
                                 <select className="form-control"
                                         onChange={this.onTeacherSelectChanged.bind(this)}
                                         disabled={this.state.teacherFilterDisabled}
                                         value={this.state.teacher}>
-                                    <option value="">Select teacher</option>
+                                    <option value=""><Translate content="selectTeacher" /></option>
                                     {this.renderTeachers()}
                                 </select>
                             </div>
                         </div>
                         <br/>
                         <div className="form-group m-t-15">
-                            <label className="col-sm-2 control-label">Filter by group</label>
+                            <label className="col-sm-2 control-label"><Translate content="filterByGroup" /></label>
                             <div className="col-sm-10">
                                 <select className="form-control"
                                         onChange={this.onGroupSelectChanged.bind(this)}
                                         disabled={this.state.groupFilterDisabled}
                                         value={this.state.group}>
-                                    <option value="">Select group</option>
+                                    <option value=""><Translate content="selectGroup" /></option>
                                     {this.renderGroups()}
                                 </select>
                             </div>
@@ -110,7 +130,7 @@ export default class ScheduleFilter extends React.Component {
                         <button type="button"
                                 className="btn btn-success btn-sm m-t-15 m-r-10 pull-right"
                                 onClick={this.applyFilters.bind(this)} >
-                            Apply filters
+                            <Translate content="applyFilters" />
                         </button>
                         <div className="clearfix"></div>
                     </div>

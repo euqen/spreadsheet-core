@@ -6,6 +6,40 @@ import ErrorCollector from './../../components/error-collector';
 import dispatcher from './../../infrastructure/dispatcher';
 import bind from './../../infrastructure/store-connector';
 import store from './registration.store';
+import counterpart from 'counterpart';
+import Translate from 'react-translate-component';
+
+counterpart.registerTranslations('en', {
+    registerNewPerson: "Register new person",
+    email: "Email",
+    firstName: "First Name",
+    middleName: "Middle Name",
+    lastName: "Last Name",
+    roles: "Roles",
+    roleTypes: {
+        manager: "Manager",
+        teacher: "Teacher",
+        student: "Student"
+    },
+    studentsGroup: "Student's group",
+    create: "Create"
+});
+
+counterpart.registerTranslations('ru', {
+    registerNewPerson: "Зарегистрировать нового человека",
+    email: "Email",
+    firstName: "Имя",
+    middleName: "Отчество",
+    lastName: "Фамилия",
+    roles: "Роль",
+    roleTypes: {
+        manager: "Админ",
+        teacher: "Преподаватель",
+        student: "Студент"
+    },
+    studentsGroup: "Группа студента",
+    create: "Создать"
+});
 
 function getState(props) {
     return {
@@ -49,14 +83,14 @@ export default class Registration extends React.Component {
                 <ErrorCollector />
                 <div className="panel panel-default">
                     <div className="panel-heading">
-                        <h3 className="panel-title">Register new person</h3>
+                        <h3 className="panel-title"><Translate content="registerNewPerson" /></h3>
                     </div>
                     <div className="panel-body">
                         <div className="row">
                             <div className="col-md-12 col-sm-12 col-xs-12">
                                 <form role="form">
                                     <div className="form-group">
-                                        <label htmlFor="emial">Email</label>
+                                        <label htmlFor="email"><Translate content="email" /></label>
                                         <input type="email"
                                                className="form-control"
                                                id="email"
@@ -66,7 +100,7 @@ export default class Registration extends React.Component {
                                     </div>
                                     <div className="form-group">
                                         <label htmlFor="firstname">
-                                            First Name</label>
+                                            <Translate content="firstName" /></label>
                                         <input type="text"
                                                className="form-control"
                                                id="firstname"
@@ -76,7 +110,7 @@ export default class Registration extends React.Component {
                                     </div>
                                     <div className="form-group">
                                         <label htmlFor="middlename">
-                                            Middle Name</label>
+                                            <Translate content="middleName" /></label>
                                         <input type="text"
                                                className="form-control"
                                                id="middlename"
@@ -86,7 +120,7 @@ export default class Registration extends React.Component {
                                     </div>
                                     <div className="form-group">
                                         <label htmlFor="lastname">
-                                            Last Name
+                                            <Translate content="lastName" />
                                         </label>
                                         <input type="text"
                                                className="form-control"
@@ -96,7 +130,7 @@ export default class Registration extends React.Component {
                                                onChange={this.onValueChanged} />
                                     </div>
                                     <div className="form-group">
-                                        <label>Roles</label>
+                                        <label><Translate content="roles" /></label>
                                         <div className="radio">
                                             <label className="cr-styled" forHtml="manager">
                                                 <input type="radio"
@@ -106,7 +140,7 @@ export default class Registration extends React.Component {
                                                        name="role"
                                                        onChange={this.onValueChanged} />
                                                 <i className="fa"></i>
-                                                <span>Manager</span>
+                                                <span><Translate content="roleTypes.manager" /></span>
                                             </label>
                                         </div>
                                         <div className="radio">
@@ -118,7 +152,7 @@ export default class Registration extends React.Component {
                                                        name="role"
                                                        onChange={this.onValueChanged} />
                                                 <i className="fa"></i>
-                                                <span>Teacher</span>
+                                                <span><Translate content="roleTypes.teacher" /></span>
                                             </label>
                                         </div>
                                         <div className="radio">
@@ -130,14 +164,14 @@ export default class Registration extends React.Component {
                                                        name="role"
                                                        onChange={this.onValueChanged} />
                                                 <i className="fa"></i>
-                                                <span>Student</span>
+                                                <span><Translate content="roleTypes.student" /></span>
                                             </label>
                                         </div>
                                     </div>
                                     {this.state.role === 'student' ?
                                         <div className="form-group">
                                             <label htmlFor="role">
-                                                Student's group
+                                                <Translate content="studentsGroup" />
                                             </label>
                                             <input type="text"
                                                    className="form-control"
@@ -147,7 +181,7 @@ export default class Registration extends React.Component {
                                                    onChange={this.onValueChanged} />
                                         </div>
                                         : null }
-                                    <button onClick={this.create} type="button" className="btn btn-success pull-right">Create</button>
+                                    <button onClick={this.create} type="button" className="btn btn-success pull-right"><Translate content="create" /></button>
                                 </form>
                             </div>
                         </div>

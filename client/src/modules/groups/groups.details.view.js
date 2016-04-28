@@ -7,7 +7,7 @@ import counterpart from 'counterpart';
 import Translate from 'react-translate-component';
 
 counterpart.registerTranslations('en', {
-    group: "Group",
+    groupIn: "Group",
     create: "Create",
     edit: "Edit",
     groupNumber: "Group Number",
@@ -16,7 +16,7 @@ counterpart.registerTranslations('en', {
 });
 
 counterpart.registerTranslations('ru', {
-    group: "группу",
+    groupIn: "группу",
     create: "Создать",
     edit: "Изменить",
     groupNumber: "Номер группы",
@@ -70,7 +70,7 @@ export default class GroupDetails extends React.Component {
                 <div className="portlet">
                     <div className="portlet-heading">
                         <h3 className="portlet-title text-dark text-uppercase">
-                            {this.state.isNew ? <Translate content="create" /> : <Translate content="edit" />} <Translate content="group" />
+                            {this.state.isNew ? <Translate content="create" /> : <Translate content="edit" />} <Translate content="groupIn" />
                         </h3>
                         <div className="portlet-widgets">
                             <a href="javascript:;" data-toggle="reload"><i className="ion-refresh"></i></a>

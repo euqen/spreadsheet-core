@@ -83,7 +83,7 @@ export default class GroupDetails extends React.Component {
                     <div id="portlet2" className="panel-collapse collapse in">
                         <div className="portlet-body">
                             <div className="form-group">
-                                <label htmlFor="emial"><Translate content="groupNumber" /></label>
+                                <label htmlFor="email"><Translate content="groupNumber" /></label>
                                 <input type="text"
                                        className="form-control"
                                        id="groupNumber"

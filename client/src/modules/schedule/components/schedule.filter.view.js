@@ -6,6 +6,7 @@ import scheduleDays from './../../../infrastructure/schedule-days';
 import dispatcher from './../../../infrastructure/dispatcher';
 import counterpart from 'counterpart';
 import Translate from 'react-translate-component';
+import LocalizationService from './../../../infrastructure/localization-service';
 
 counterpart.registerTranslations('en', {
     scheduleFilter: "Schedule Filter",
@@ -41,6 +42,7 @@ export default class ScheduleFilter extends React.Component {
         };
         this.renderTeachers = this.renderTeachers.bind(this);
         this.renderGroups = this.renderGroups.bind(this);
+        this.state.localizationService = new LocalizationService(additionalConstants);
     }
 
     componentWillReceiveProps(props) {
@@ -116,7 +118,7 @@ export default class ScheduleFilter extends React.Component {
                                         onChange={this.onTeacherSelectChanged.bind(this)}
                                         disabled={this.state.teacherFilterDisabled}
                                         value={this.state.teacher}>
-                                     <option value="">{additionalConstants[counterpart.getLocale()].selectTeacher}</option>
+                                     <option value="">{this.state.localizationService.translate("selectTeacher")}</option>
                                     {this.renderTeachers()}
                                 </select>
                             </div>
@@ -129,7 +131,7 @@ export default class ScheduleFilter extends React.Component {
                                         onChange={this.onGroupSelectChanged.bind(this)}
                                         disabled={this.state.groupFilterDisabled}
                                         value={this.state.group}>
-                                    <option value="">{additionalConstants[counterpart.getLocale()].selectGroup}</option>
+                                    <option value="">{this.state.localizationService.translate("selectGroup")}</option>
                                     {this.renderGroups()}
                                 </select>
                             </div>

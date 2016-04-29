@@ -7,11 +7,11 @@ import counterpart from 'counterpart';
 import Translate from 'react-translate-component';
 
 counterpart.registerTranslations('en', {
-    alertMessage: "Please select either teacher or group for filter",
+    alertMessage: "Please, select either teacher or group for filter",
 });
 
 counterpart.registerTranslations('ru', {
-    alertMessage: "Пожалуйста выберите преподавателя или группу для фильтра",
+    alertMessage: "Пожалуйста, выберите преподавателя или группу для фильтра",
 });
 
 export default class WeekSchedule extends React.Component {

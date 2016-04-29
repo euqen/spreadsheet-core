@@ -1,6 +1,11 @@
 import React from 'react';
 import counterpart from 'counterpart';
 
+const languages = {
+    en: "English",
+    ru: "Русский"
+};
+
 export default class LocaleSwitcher extends React.Component {
     constructor(){
         super();
@@ -11,27 +16,24 @@ export default class LocaleSwitcher extends React.Component {
     }
 
     handleChange(locale) {
-        console.log(locale);
         counterpart.setLocale(locale);
         this.setState({locale: locale});
     }
 
-
     render() {
+        var languageOptions = [];
+        for (var key in languages) {
+            languageOptions.push(
+                <li key={key}>
+                    <a href="#" onClick={this.handleChange.bind(this, key)}>{languages[key]}</a>
+                </li>
+            );
+        }
         return (
-             // <select class="selectpicker" defaultValue={counterpart.getLocale()} onChange={this.handleChange}>
-             //        <option>en</option>
-             //        <option>ru</option>
-             // </select>
              <li className="dropdown">
-                <a data-toggle="dropdown" className="dropdown-toggle" href="#" aria-expanded="false">{this.state.locale}<span className="caret"></span></a>
+                <a data-toggle="dropdown" className="dropdown-toggle" href="#" aria-expanded="false">{languages[this.state.locale]}<span className="caret"></span></a>
                 <ul role="menu" className="dropdown-menu pro-menu fadeInUp animated">
-                    <li>
-                        <a href="#" onClick={this.handleChange.bind(this, "en")} aria-value="en">en</a>
-                    </li>
-                    <li>
-                        <a href="#" onClick={this.handleChange.bind(this, "ru")} aria-value="ru">ru</a>
-                    </li>
+                    {languageOptions}
                 </ul>
             </li>
         );

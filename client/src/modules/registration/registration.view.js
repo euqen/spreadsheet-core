@@ -8,6 +8,7 @@ import bind from './../../infrastructure/store-connector';
 import store from './registration.store';
 import counterpart from 'counterpart';
 import Translate from 'react-translate-component';
+import LocalizationService from './../../infrastructure/localization-service';
 
 counterpart.registerTranslations('en', {
     registerNewPerson: "Register new person",
@@ -73,6 +74,7 @@ export default class Registration extends React.Component {
 
         this.onValueChanged = this.onValueChanged.bind(this);
         this.create = this.create.bind(this);
+        this.state.localizationService = new LocalizationService(additionalConstants);
     }
 
     onValueChanged(event) {
@@ -109,7 +111,7 @@ export default class Registration extends React.Component {
                                         <input type="email"
                                                className="form-control"
                                                id="email"
-                                               placeholder={additionalConstants[counterpart.getLocale()].enterEmail}
+                                               placeholder={this.state.localizationService.translate("enterEmail")}
                                                name="email"
                                                onChange={this.onValueChanged} />
                                     </div>
@@ -119,7 +121,7 @@ export default class Registration extends React.Component {
                                         <input type="text"
                                                className="form-control"
                                                id="firstname"
-                                               placeholder={additionalConstants[counterpart.getLocale()].firstName}
+                                               placeholder={this.state.localizationService.translate("firstName")}
                                                name="firstName"
                                                onChange={this.onValueChanged} />
                                     </div>
@@ -129,7 +131,7 @@ export default class Registration extends React.Component {
                                         <input type="text"
                                                className="form-control"
                                                id="middlename"
-                                               placeholder={additionalConstants[counterpart.getLocale()].middleName}
+                                               placeholder={this.state.localizationService.translate("middleName")}
                                                name="middleName"
                                                onChange={this.onValueChanged} />
                                     </div>
@@ -140,7 +142,7 @@ export default class Registration extends React.Component {
                                         <input type="text"
                                                className="form-control"
                                                id="lastname"
-                                               placeholder={additionalConstants[counterpart.getLocale()].lastName}
+                                               placeholder={this.state.localizationService.translate("lastName")}
                                                name="lastName"
                                                onChange={this.onValueChanged} />
                                     </div>

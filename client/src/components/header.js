@@ -2,6 +2,7 @@ import React from 'react';
 import LocalSwitcher from './locale-switcher';
 import counterpart from 'counterpart';
 import Translate from 'react-translate-component';
+import LocalizationService from './../infrastructure/localization-service';
 
 counterpart.registerTranslations('en', {
     dropdownMenu: {
@@ -31,6 +32,11 @@ const additionalConstants = {
 };
 
 export default class Header extends React.Component {
+    constructor() {
+        super();
+        this.state = {};
+        this.state.localizationService = new LocalizationService(additionalConstants);
+    }
     render() {
         return (
             <header className="top-head container-fluid">
@@ -42,7 +48,7 @@ export default class Header extends React.Component {
                 </button>
 
                 <form role="search" className="navbar-left app-search pull-left hidden-xs">
-                    <input type="text" placeholder={additionalConstants[counterpart.getLocale()].search} className="form-control"/>
+                    <input type="text" placeholder={this.state.localizationService.translate("search")} className="form-control"/>
                     <a href=""><i className="fa fa-search"></i></a>
                 </form>
 

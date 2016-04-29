@@ -5,6 +5,7 @@ import * as actions from './../../schedule/schedule.actions';
 import dispatcher from './../../../infrastructure/dispatcher';
 import counterpart from 'counterpart';
 import Translate from 'react-translate-component';
+import LocalizationService from './../../../infrastructure/localization-service';
 
 counterpart.registerTranslations('en', {
     time: "Time",
@@ -63,6 +64,7 @@ export default class DaySchedule extends React.Component {
 
         this.state = this.getInitState();
         this.onValueChanged = this.onValueChanged.bind(this);
+        this.state.localizationService = new LocalizationService(additionalConstants);
     }
 
     getInitState() {
@@ -140,16 +142,16 @@ export default class DaySchedule extends React.Component {
                                 {this.state.showAddForm ?
                                 <tr>
                                     <td colSpan="2">
-                                        <input className="form-control" type="text" placeholder={additionalConstants[counterpart.getLocale()].time} onChange={this.onValueChanged} />
+                                        <input className="form-control" type="text" placeholder={this.state.localizationService.translate("time")} onChange={this.onValueChanged} />
                                     </td>
                                     <td>
-                                        <input className="form-control" type="text" placeholder={additionalConstants[counterpart.getLocale()].title} onChange={this.onValueChanged} />
+                                        <input className="form-control" type="text" placeholder={this.state.localizationService.translate("title")} onChange={this.onValueChanged} />
                                     </td>
                                     <td>
-                                        <input className="form-control" type="text" placeholder={additionalConstants[counterpart.getLocale()].type} onChange={this.onValueChanged} />
+                                        <input className="form-control" type="text" placeholder={this.state.localizationService.translate("type")} onChange={this.onValueChanged} />
                                     </td>
                                     <td>
-                                        <input className="form-control" type="text" placeholder={additionalConstants[counterpart.getLocale()].auditory} onChange={this.onValueChanged} />
+                                        <input className="form-control" type="text" placeholder={this.state.localizationService.translate("auditory")} onChange={this.onValueChanged} />
                                     </td>
                                     <td></td>
                                     <td>

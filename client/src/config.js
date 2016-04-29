@@ -29,7 +29,7 @@ System.config({
     "moment": "npm:moment@2.12.0",
     "nicescroll": "assets/js/nice-scroll.min.js",
     "noty": "npm:noty@2.3.8",
-    "react": "npm:react@0.14.8",
+    "react": "npm:react@0.14.7",
     "react-dom": "npm:react-dom@0.14.7",
     "react-router": "npm:react-router@2.0.0",
     "react-translate-component": "npm:react-translate-component@0.10.0",
@@ -129,7 +129,7 @@ System.config({
     },
     "npm:async@0.9.2": {
       "process": "github:jspm/nodelibs-process@0.1.2",
-      "systemjs-json": "github:systemjs/plugin-json@0.1.2"
+      "systemjs-json": "github:systemjs/plugin-json@0.1.0"
     },
     "npm:babel-runtime@5.8.35": {
       "process": "github:jspm/nodelibs-process@0.1.2"
@@ -527,6 +527,10 @@ System.config({
       "object-assign": "npm:object-assign@4.0.1",
       "react": "npm:react@0.14.8",
       "react-interpolate-component": "npm:react-interpolate-component@0.8.1"
+    },
+    "npm:react@0.14.7": {
+      "fbjs": "npm:fbjs@0.6.1",
+      "process": "github:jspm/nodelibs-process@0.1.2"
     },
     "npm:react@0.14.8": {
       "fbjs": "npm:fbjs@0.6.1",

@@ -33,3 +33,12 @@ export function getTeachers() {
 export function getCurrentUser() {
     return api.get('/api/v1/user/current');
 }
+
+export function changeLocale(id, locale) {
+    return api.put(`/api/v1/user/${id}/locale`, {locale: locale})
+        .then( res => {
+            if (!res.hasErrors) {
+                dispatcher.dispatch({action: 'user.changed', data: res});
+            }
+        });
+}

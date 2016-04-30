@@ -8,5 +8,6 @@ export default new mongo.Schema({
     email: {type: String, required: true},
     password: {type: String, required: true},
     role: {type: String, required: true},
+    locale: {type: String, required: true},
     isRemoved: {type: Boolean, required: true}
 });

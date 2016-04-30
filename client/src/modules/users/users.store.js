@@ -21,6 +21,8 @@ export default class UsersStore extends Store {
 
         dispatcher.on('users.retrieve', this.onUsersRetrieve.bind(this));
         dispatcher.on('users.retrieved', this.onUsersRetrieved.bind(this));
+
+        dispatcher.on('user.change-locale', this.onChangeUserLocale.bind(this));
     }
 
     setDefaults() {
@@ -47,6 +49,14 @@ export default class UsersStore extends Store {
 
     onUsersRetrieved(payload) {
         this._users = payload.data;
+        this.trigger('changed');
+    }
+
+    onChangeUserLocale(payload) {
+        return actions.changeLocale(payload.userId, payload.locale);
+    }
+
+    onChangedLocale() {
         this.trigger('changed');
     }
 

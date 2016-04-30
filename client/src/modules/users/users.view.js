@@ -5,7 +5,6 @@ import store from './users.store';
 import counterpart from 'counterpart';
 import Translate from 'react-translate-component';
 
-
 counterpart.registerTranslations('en', {
     registeredUsers: "Registered users",
     noUsers: "There are no users found, please add one at least",
@@ -110,7 +109,7 @@ export default class UsersList extends React.Component {
 
 class User extends React.Component {
     removeUser() {
-        dispatcher.dispatch({action: 'user.remove', userId: this.props.user._id})
+        dispatcher.dispatch({action: 'user.remove', userId: this.props.user._id});
     }
 
     render() {

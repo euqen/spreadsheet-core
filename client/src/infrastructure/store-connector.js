@@ -2,7 +2,7 @@ import React from 'react';
 
 export default function bind(store, getState) {
     return function (DecoratedComponent) {
-        return class StoreConnector extends React.Component {
+        class StoreConnector extends React.Component {
             constructor(props) {
                 super(props);
 
@@ -28,8 +28,14 @@ export default function bind(store, getState) {
             }
 
             render() {
-                return <DecoratedComponent {...this.props} {...this.state} />;
+                return <DecoratedComponent {...this.props} {...this.state} {...this.context} />;
             }
         };
+
+        StoreConnector.contextTypes = {
+            user: React.PropTypes.object
+        };
+
+        return StoreConnector;
     };
 }

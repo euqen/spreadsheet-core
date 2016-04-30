@@ -4,6 +4,7 @@ import counterpart from 'counterpart';
 import Translate from 'react-translate-component';
 import LocalizationService from './../infrastructure/localization-service';
 
+
 counterpart.registerTranslations('en', {
     dropdownMenu: {
         profile: 'Profile',
@@ -35,8 +36,10 @@ export default class Header extends React.Component {
     constructor() {
         super();
         this.state = {};
+        
         this.state.localizationService = new LocalizationService(additionalConstants);
     }
+
     render() {
         return (
             <header className="top-head container-fluid">
@@ -54,7 +57,7 @@ export default class Header extends React.Component {
 
                 <nav className=" navbar-default" role="navigation">
                     <ul className="nav navbar-nav hidden-xs">
-                            <LocalSwitcher />
+                            <LocalSwitcher user={this.props.user} />
                     </ul>
                     <ul className="nav navbar-nav navbar-right top-menu top-right-menu">
                         <li className="dropdown">

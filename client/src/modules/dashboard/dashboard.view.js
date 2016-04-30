@@ -6,6 +6,8 @@ import Header from './../../components/header';
 import DaySchedule from './../schedule/components/day-schedule.view';
 import counterpart from 'counterpart';
 import Translate from 'react-translate-component';
+import bind from './../../infrastructure/store-connector';
+import store from './../../modules/users/users.store';
 
 counterpart.registerTranslations('en', {
     titleTodaySchedule: "Today Schedule",
@@ -17,13 +19,21 @@ counterpart.registerTranslations('ru', {
     titleTomorrowSchedule: "Расписание на завтра"
 });
 
+
+function getState(props) {
+    return {
+        user: props.user
+    }
+}
+
+@bind(store, getState)
 export default class Dashboard extends React.Component {
     render() {
         return (
             <div>
                 <SideBar />
                 <section className="content">
-                    <Header />
+                    <Header user={this.props.user} />
                         <div className="wrapper container-fluid m-t-20">
                             {this.props.children ? this.props.children :
                                 <div>

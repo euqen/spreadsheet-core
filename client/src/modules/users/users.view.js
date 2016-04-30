@@ -2,6 +2,41 @@ import React from 'react';
 import dispatcher from './../../infrastructure/dispatcher';
 import bind from './../../infrastructure/store-connector';
 import store from './users.store';
+import counterpart from 'counterpart';
+import Translate from 'react-translate-component';
+
+counterpart.registerTranslations('en', {
+    registeredUsers: "Registered users",
+    noUsers: "There are no users found, please add one at least",
+    email: "Email",
+    firstName: "First Name",
+    middleName: "Middle Name",
+    lastName: "Last Name",
+    role: "Role",
+    roleTypes: {
+        manager: "Manager",
+        teacher: "Teacher",
+        student: "Student"
+    },
+    actions: "Actions"
+});
+
+counterpart.registerTranslations('ru', {
+    registeredUsers: "Зарегистрированные пользователи",
+    noUsers: "Не найдено ни одного пользователя, добавьте пользователя для просмотра",
+    email: "Email",
+    firstName: "Имя",
+    middleName: "Отчество",
+    lastName: "Фамилия",
+    role: "Роль",
+    roleTypes: {
+        manager: "Админ",
+        teacher: "Преподаватель",
+        student: "Студент"
+    },
+    actions: "Действия"
+});
+
 
 function getState(props) {
     return {
@@ -36,25 +71,25 @@ export default class UsersList extends React.Component {
         return (
             <div className="panel panel-default">
                 <div className="panel-heading">
-                    <h3 className="panel-title">Registered users</h3>
+                    <h3 className="panel-title"><Translate content="registeredUsers" /></h3>
                 </div>
                 <div className="panel-body">
                     <div className="row">
                         <div className="col-md-12 col-sm-12 col-xs-12">
                             {this.state.users.length === 0 ?
                                 <div className="alert alert-warning">
-                                    There are no users found, please add one at least.
+                                    <Translate content="noUsers" />
                                 </div> :
                                 <table className="table table-hover">
                                     <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>E-Mail</th>
-                                        <th>First Name</th>
-                                        <th>Middle Name</th>
-                                        <th>Last Name</th>
-                                        <th>Role</th>
-                                        <th>Actions</th>
+                                        <th><Translate content="email" /></th>
+                                        <th><Translate content="firstName" /></th>
+                                        <th><Translate content="middleName" /></th>
+                                        <th><Translate content="lastName" /></th>
+                                        <th><Translate content="role" /></th>
+                                        <th><Translate content="actions" /></th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -74,7 +109,7 @@ export default class UsersList extends React.Component {
 
 class User extends React.Component {
     removeUser() {
-        dispatcher.dispatch({action: 'user.remove', userId: this.props.user._id})
+        dispatcher.dispatch({action: 'user.remove', userId: this.props.user._id});
     }
 
     render() {

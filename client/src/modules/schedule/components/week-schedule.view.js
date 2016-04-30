@@ -3,6 +3,16 @@
 import React from 'react';
 import DaySchedule from './day-schedule.view';
 import scheduleDays from './../../../infrastructure/schedule-days';
+import counterpart from 'counterpart';
+import Translate from 'react-translate-component';
+
+counterpart.registerTranslations('en', {
+    alertMessage: "Please, select either teacher or group for filter",
+});
+
+counterpart.registerTranslations('ru', {
+    alertMessage: "Пожалуйста, выберите преподавателя или группу для фильтра",
+});
 
 export default class WeekSchedule extends React.Component {
     constructor() {
@@ -29,7 +39,7 @@ export default class WeekSchedule extends React.Component {
         if (!this.context.user.permissions.canManageSchedule && !this.state.group && !this.state.teacher) {
             return (
                 <div className="alert alert-warning">
-                    Please select either teacher or group for filter
+                    <Translate content="alertMessage" />
                 </div>
             );
         }

@@ -4,6 +4,26 @@ import bind from './../../infrastructure/store-connector';
 import store from './groups.store';
 import moment from 'moment';
 import {Link} from 'react-router';
+import counterpart from 'counterpart';
+import Translate from 'react-translate-component';
+
+counterpart.registerTranslations('en', {
+    groups: "Groups",
+    noGroups: "There are no groups found, please add one at least",
+    createdOn: "Created On",
+    groupNumber: "Group Number",
+    createdBy: "Created By",
+    actions: "Actions"
+});
+
+counterpart.registerTranslations('ru', {
+    groups: "Группы",
+    noGroups: "Не найдено ни одной группы, добавьте группу для просмотра",
+    createdOn: "Дата добавления",
+    groupNumber: "Номер группы",
+    createdBy: "Кем добавлен",
+    actions: "Действия"
+});
 
 function getState(props) {
     return {
@@ -42,7 +62,7 @@ export default class GroupsList extends React.Component {
                 <div className="portlet">
                     <div className="portlet-heading">
                         <h3 className="portlet-title text-dark text-uppercase">
-                            Groups
+                            <Translate content="groups" />
                         </h3>
                         <div className="portlet-widgets">
                             <a href="javascript:;" data-toggle="reload">
@@ -64,17 +84,17 @@ export default class GroupsList extends React.Component {
                         <div className="portlet-body">
                             {this.state.groups.length === 0 ?
                                 <div className="alert alert-warning">
-                                    There are no groups found, please add one at least.
+                                    <Translate content="noGroups" />
                                 </div> :
                                 <div className="table-responsive">
                                     <table className="table">
                                         <thead>
                                         <tr>
                                             <th>#</th>
-                                            <th>Group Number</th>
-                                            <th>Created On</th>
-                                            <th>Created By</th>
-                                            <th>Actions</th>
+                                            <th><Translate content="groupNumber" /></th>
+                                            <th><Translate content="createdOn" /></th>
+                                            <th><Translate content="createdBy" /></th>
+                                            <th><Translate content="actions" /></th>
                                         </tr>
                                         </thead>
                                         <tbody>

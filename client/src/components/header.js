@@ -1,6 +1,45 @@
 import React from 'react';
+import LocalSwitcher from './locale-switcher';
+import counterpart from 'counterpart';
+import Translate from 'react-translate-component';
+import LocalizationService from './../infrastructure/localization-service';
+
+
+counterpart.registerTranslations('en', {
+    dropdownMenu: {
+        profile: 'Profile',
+        settings: 'Settings',
+        logout: 'Logout',
+        search: 'Search...'
+    }
+});
+
+counterpart.registerTranslations('ru', {
+    dropdownMenu: {
+        profile: 'Профиль',
+        settings: 'Настройки',
+        logout: 'Выход',
+        seacrh: 'Поиск'
+    }
+});
+
+const additionalConstants = {
+    en: {
+        search: "Search..."
+    },
+    ru: {
+        search: "Поиск..."
+    }
+};
 
 export default class Header extends React.Component {
+    constructor() {
+        super();
+        this.state = {};
+        
+        this.state.localizationService = new LocalizationService(additionalConstants);
+    }
+
     render() {
         return (
             <header className="top-head container-fluid">
@@ -12,19 +51,13 @@ export default class Header extends React.Component {
                 </button>
 
                 <form role="search" className="navbar-left app-search pull-left hidden-xs">
-                    <input type="text" placeholder="Search..." className="form-control"/>
+                    <input type="text" placeholder={this.state.localizationService.translate("search")} className="form-control"/>
                     <a href=""><i className="fa fa-search"></i></a>
                 </form>
 
                 <nav className=" navbar-default" role="navigation">
                     <ul className="nav navbar-nav hidden-xs">
-                        <li className="dropdown">
-                            <a data-toggle="dropdown" className="dropdown-toggle" href="#">English
-                                <span className="caret"></span></a>
-                            <ul role="menu" className="dropdown-menu">
-                                <li><a href="#">Russian</a></li>
-                            </ul>
-                        </li>
+                            <LocalSwitcher user={this.props.user} />
                     </ul>
                     <ul className="nav navbar-nav navbar-right top-menu top-right-menu">
                         <li className="dropdown">
@@ -40,9 +73,24 @@ export default class Header extends React.Component {
                                 <span className="username">John Deo </span> <span className="caret"></span>
                             </a>
                             <ul className="dropdown-menu pro-menu fadeInUp animated" tabIndex="5003">
-                                <li><a href="profile.html"><i className="fa fa-briefcase"></i>Profile</a></li>
-                                <li><a href="#"><i className="fa fa-cog"></i> Settings</a></li>
-                                <li><a href="#"><i className="fa fa-sign-out"></i> Log Out</a></li>
+                                <li>
+                                    <a href="profile.html">
+                                        <i className="fa fa-briefcase"></i>
+                                        <Translate content="dropdownMenu.profile" />
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <i className="fa fa-cog"></i>
+                                        <Translate content="dropdownMenu.settings" />
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <i className="fa fa-sign-out"></i>
+                                        <Translate content="dropdownMenu.logout" />
+                                    </a>
+                                </li>
                             </ul>
                         </li>
                     </ul>

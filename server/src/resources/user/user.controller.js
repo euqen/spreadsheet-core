@@ -1,6 +1,7 @@
 import createValidator from './validators/user.create.validator';
 import removeValidator from './validators/user.remove.validator';
 import service from './user.service';
+import languages from './../../internal/languages';
 
 export default {
     create(req, res) {
@@ -9,7 +10,7 @@ export default {
                 if (!data.isValid) {
                    return;
                 }
-
+                data.locale = languages.en;
                 return service.create(data.result);
             });
     },
@@ -40,5 +41,11 @@ export default {
 
     current(req, res) {
         return service.findOne({email: req.user.email});
+    },
+
+    changeLocale(req, res) {
+        return service.updateOne({_id: req.user._id}, doc => {
+            doc.locale = req.body.locale;
+        });
     }
 }

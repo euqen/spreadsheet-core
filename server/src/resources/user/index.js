@@ -9,5 +9,6 @@ router.post('/create', controller.create);
 router.get('/', controller.list);
 router.get('/current', controller.current);
 router.put('/:id/remove', controller.remove);
+router.put('/:id/locale', controller.changeLocale);
 
 export default router;

@@ -35,10 +35,23 @@ export function getCurrentUser() {
 }
 
 export function changeLocale(id, locale) {
-    return api.put(`/api/v1/user/${id}/locale`, {locale: locale})
+    return api.put(`/api/v1/user/${id}/locale`, {locale: locale});
+}
+
+export function updateUser(id, data) {
+    return api.put(`/api/v1/user/${id}/update`, {data: data})
         .then( res => {
             if (!res.hasErrors) {
-                dispatcher.dispatch({action: 'user.changed', data: res});
+                dispatcher.dispatch({action: 'user.updated', data: res});
+            }
+        });
+}
+
+export function logout() {
+    return api.put(`/api/v1/auth/log-out`)
+        .then( res => {
+            if (!res.hasErrors) {
+                dispatcher.dispatch({action: 'user.loggedout'});
             }
         });
 }

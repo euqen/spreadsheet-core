@@ -1,14 +1,15 @@
 import React from 'react';
 import LocalSwitcher from './locale-switcher';
+import {Link} from 'react-router';
 import counterpart from 'counterpart';
 import Translate from 'react-translate-component';
 import LocalizationService from './../infrastructure/localization-service';
-
+import dispatcher from './../infrastructure/dispatcher';
 
 counterpart.registerTranslations('en', {
     dropdownMenu: {
         profile: 'Profile',
-        settings: 'Settings',
+        statistic: 'Statistic',
         logout: 'Logout',
         search: 'Search...'
     }
@@ -17,7 +18,7 @@ counterpart.registerTranslations('en', {
 counterpart.registerTranslations('ru', {
     dropdownMenu: {
         profile: 'Профиль',
-        settings: 'Настройки',
+        statistic: 'Статистика',
         logout: 'Выход',
         seacrh: 'Поиск'
     }
@@ -38,6 +39,10 @@ export default class Header extends React.Component {
         this.state = {};
         
         this.state.localizationService = new LocalizationService(additionalConstants);
+    }
+
+    logout() {
+        dispatcher.dispatch({action: 'user.logout'});
     }
 
     render() {
@@ -70,23 +75,23 @@ export default class Header extends React.Component {
                         <li className="dropdown text-center">
                             <a data-toggle="dropdown" className="dropdown-toggle" href="#">
                                 <img alt="" src="" className="img-circle profile-img thumb-sm"/>
-                                <span className="username">John Deo </span> <span className="caret"></span>
+                                <span className="username">{this.props.user.firstName + " " + this.props.user.lastName}</span> <span className="caret"></span>
                             </a>
                             <ul className="dropdown-menu pro-menu fadeInUp animated" tabIndex="5003">
                                 <li>
-                                    <a href="profile.html">
+                                    <Link to="/profile" >
                                         <i className="fa fa-briefcase"></i>
                                         <Translate content="dropdownMenu.profile" />
-                                    </a>
+                                    </Link>
                                 </li>
                                 <li>
                                     <a href="#">
                                         <i className="fa fa-cog"></i>
-                                        <Translate content="dropdownMenu.settings" />
+                                        <Translate content="dropdownMenu.statistic" />
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="#">
+                                    <a href="#" onClick={this.logout.bind(this)}>
                                         <i className="fa fa-sign-out"></i>
                                         <Translate content="dropdownMenu.logout" />
                                     </a>

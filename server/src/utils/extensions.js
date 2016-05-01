@@ -44,6 +44,7 @@ export function globalErrorHandler(err, req, res, next) {
     if (err.name === 'UnauthorizedError') {
         res.status(401).send('invalid token...');
     } else {
+        console.log(err);
         res.status(400).send('err');
     }
 }

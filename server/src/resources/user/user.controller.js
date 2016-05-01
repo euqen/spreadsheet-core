@@ -56,12 +56,13 @@ export default {
                 if (!data.isValid) {
                     return;
                 }
+                
                 return service.updateOne({_id: req.user._id}, doc => {
-                    doc.firstName = req.body.data.firstName;
-                    doc.middleName = req.body.data.middleName;
-                    doc.lastName = req.body.data.lastName;
+                    doc.firstName = data.firstName;
+                    doc.middleName = data.middleName;
+                    doc.lastName = data.lastName;
                     if(!req.body.group) {
-                        doc.group = req.body.data.group;
+                        doc.group = data.group;
                     }
                 });
             });

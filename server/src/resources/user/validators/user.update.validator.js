@@ -8,9 +8,9 @@ import roles from './../../../internal/roles';
 export default function(req, res) {
     return validate((errors) => {
         const userId = req.params.id;
-        const firstName = req.body.firstName;
-        const lastName = req.body.lastName;
-        const middleName = req.body.middleName;
+        const firstName = validator.trim(req.body.firstName);
+        const lastName = validator.trim(req.body.lastName);
+        const middleName = validator.trim(req.body.middleName);
 
         if (!userId) {
             errors.collect('user', 'Such user does not exists');
@@ -31,7 +31,11 @@ export default function(req, res) {
                     return;
                 }
 
-                return user;
+                return {
+                    firstName: firstName,
+                    lastName: lastName,
+                    middleName: middleName
+                };
             });
 
     }, req, res);

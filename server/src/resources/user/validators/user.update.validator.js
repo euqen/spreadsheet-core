@@ -36,8 +36,7 @@ export default function(req, res) {
                     lastName: lastName,
                     middleName: middleName
                 };
-
-            });
+        });
 
     }, req, res);
 }

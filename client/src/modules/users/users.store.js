@@ -23,6 +23,8 @@ export default class UsersStore extends Store {
         dispatcher.on('users.retrieved', this.onUsersRetrieved.bind(this));
 
         dispatcher.on('user.change-locale', this.onChangeUserLocale.bind(this));
+        dispatcher.on('user.logout', this.logout.bind(this));
+        dispatcher.on('user.loggedout', this.loggedout.bind(this));
     }
 
     setDefaults() {
@@ -60,4 +62,11 @@ export default class UsersStore extends Store {
         this.trigger('changed');
     }
 
+    logout() {
+        return actions.logout();
+    }
+
+    loggedout() {
+        browserHistory.push('/');
+    }
 }

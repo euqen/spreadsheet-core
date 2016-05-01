@@ -6,5 +6,6 @@ const router = express.Router();
 const controller = responsify(authController);
 
 router.post('/log-in', controller.logIn);
+router.put('/log-out', controller.logOut);
 
 export default router;

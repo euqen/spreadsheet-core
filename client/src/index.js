@@ -10,6 +10,7 @@ import Users from './modules/users/users.view';
 import Schedule from './modules/schedule/schedule.view';
 import GroupsList from './modules/groups/groups.list.view';
 import GroupDetails from './modules/groups/groups.details.view';
+import Profile from './modules/profile/profile.view';
 
 const Routes = (
   <Router history={browserHistory}>
@@ -21,6 +22,7 @@ const Routes = (
               <Route path="/schedule" component={Schedule} name="schedule" />
               <Route path="/groups" component={GroupsList} name="groups" />
               <Route path="/groups/:id" component={GroupDetails} name="group-create" />
+              <Route path="/profile" component={Profile} name="profile" />
           </Route>
       </Route>
   </Router>

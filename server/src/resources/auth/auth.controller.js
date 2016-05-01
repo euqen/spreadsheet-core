@@ -16,5 +16,10 @@ export default {
                         });
                 }
             });
+    },
+
+    logOut(req, res) {
+        req.session.token = null;
+        return new Promise(resolve => resolve()); //lolstuff goes here
     }
 }

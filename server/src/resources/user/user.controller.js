@@ -1,5 +1,6 @@
 import createValidator from './validators/user.create.validator';
 import removeValidator from './validators/user.remove.validator';
+import updateValidator from './validators/user.update.validator';
 import service from './user.service';
 import languages from './../../internal/languages';
 
@@ -10,7 +11,7 @@ export default {
                 if (!data.isValid) {
                    return;
                 }
-                data.locale = languages.en;
+                data.result.locale = languages.en;
                 return service.create(data.result);
             });
     },
@@ -47,5 +48,23 @@ export default {
         return service.updateOne({_id: req.user._id}, doc => {
             doc.locale = req.body.locale;
         });
+    },
+
+    updateUser(req, res) {
+        return updateValidator(req, res)
+            .then(data => {
+                if (!data.isValid) {
+                    return;
+                }
+                return service.updateOne({_id: req.user._id}, doc => {
+                    doc.firstName = req.body.data.firstName;
+                    doc.middleName = req.body.data.middleName;
+                    doc.lastName = req.body.data.lastName;
+                    if(!req.body.group) {
+                        doc.group = req.body.data.group;
+                    }
+                });
+            });
     }
+    
 }

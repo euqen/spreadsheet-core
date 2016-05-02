@@ -19,7 +19,7 @@ System.config({
     "babel": "npm:babel-core@5.8.35",
     "babel-runtime": "npm:babel-runtime@5.8.35",
     "bootstrap": "github:twbs/bootstrap@3.3.6",
-    "timepicker": "npm:bootstrap-timepicker@0.5.2",
+    "bootstrap-timepicker": "npm:bootstrap-timepicker@0.5.2",
     "core-js": "npm:core-js@1.2.6",
     "counterpart": "npm:counterpart@0.17.2",
     "driftyco/ionicons": "github:driftyco/ionicons@2.0.1",
@@ -36,6 +36,7 @@ System.config({
     "react-time-picker": "npm:react-time-picker@1.1.0",
     "react-translate-component": "npm:react-translate-component@0.10.0",
     "superagent": "npm:superagent@1.7.2",
+    "timepicker": "npm:bootstrap-timepicker@0.5.2",
     "github:jspm/nodelibs-assert@0.1.0": {
       "assert": "npm:assert@1.3.0"
     },

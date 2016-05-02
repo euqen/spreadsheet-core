@@ -3,6 +3,10 @@ import removeValidator from './validators/user.remove.validator';
 import updateValidator from './validators/user.update.validator';
 import service from './user.service';
 import languages from './../../internal/languages';
+import nodemailer from 'nodemailer';
+import generatePassword from "password-generator";
+import authService from './../auth/auth.service';
+import smtpConfig from './../../config/smtp-config';
 
 export default {
     create(req, res) {
@@ -11,7 +15,12 @@ export default {
                 if (!data.isValid) {
                    return;
                 }
+
+                const password = authService.generateSecurePassword();
+                this.sendPasswordInMail(data.result.email, password);
+
                 data.result.locale = languages.en;
+                data.result.password = authService.generateHash(password);
                 return service.create(data.result);
             });
     },
@@ -56,7 +65,7 @@ export default {
                 if (!data.isValid) {
                     return;
                 }
-                
+
                 return service.updateOne({_id: req.user._id}, doc => {
                     doc.firstName = data.firstName;
                     doc.middleName = data.middleName;
@@ -66,6 +75,19 @@ export default {
                     }
                 });
             });
+    },
+
+    sendPasswordInMail(to, password) {
+        var smtpTransport = nodemailer.createTransport("SMTP", smtpConfig);
+
+        smtpTransport.sendMail({
+            from: "bsuir2017@gmail.com",
+            to: to,
+            subject: "Your password in spreadsheet system",
+            text: "Your password: " + password
+        }, function(){
+            smtpTransport.close();
+        });
     }
-    
+
 }

@@ -5,6 +5,7 @@ export default new mongo.Schema({
     type: {type: String, required: true},
     title: {type: String, required: true},
     auditory: {type: String, required: false},
-    teacher: {type: String, required: true},
-    time: {type: Date, required: true}
+    teacher: {type: Object, required: true},
+    group: {type: Object, required: true},
+    time: {type: String, required: true}
 });

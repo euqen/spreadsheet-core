@@ -40,10 +40,12 @@ export default class Dashboard extends React.Component {
                                     <DaySchedule
                                         title=<Translate content="titleTodaySchedule" />
                                         hideAddForm={true}
+                                        schedule={[]}
                                     />
                                     <DaySchedule
                                         title=<Translate content="titleTomorrowSchedule" />
                                         hideAddForm={true}
+                                        schedule={[]}
                                     />
                                 </div>}
                         </div>

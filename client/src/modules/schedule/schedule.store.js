@@ -18,6 +18,8 @@ export default class ScheduleStore extends Store {
 
     registerDispatcherEvents() {
         dispatcher.on('schedule.create', this.onScheduleCreate.bind(this));
+        dispatcher.on('schedule.created', this.onScheduleCreated.bind(this));
+
         dispatcher.on('schedule.retrieve', this.onScheduleRetrieve.bind(this));
         dispatcher.on('schedule.retrieved', this.onScheduleRetrieved.bind(this));
 

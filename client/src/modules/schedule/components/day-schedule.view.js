@@ -6,6 +6,8 @@ import dispatcher from './../../../infrastructure/dispatcher';
 import counterpart from 'counterpart';
 import Translate from 'react-translate-component';
 import LocalizationService from './../../../infrastructure/localization-service';
+import TimePicker from './../../../components/timepicker';
+import activityTypes from './../../../infrastructure/activity-types';
 
 counterpart.registerTranslations('en', {
     time: "Time",
@@ -54,7 +56,7 @@ const additionalConstants = {
         time: "Время",
         title: "Заголовок",
         type: "Тип",
-        auditory: "Аудитория",
+        auditory: "Аудитория"
     }
 };
 
@@ -70,7 +72,9 @@ export default class DaySchedule extends React.Component {
     getInitState() {
         return {
             showAddForm: false,
-            schedule: []
+            schedule: [],
+            teacher: '',
+            group: ''
         };
     }
 
@@ -86,8 +90,8 @@ export default class DaySchedule extends React.Component {
         const model = {
             day: this.props.day.value,
             time: this.state.time,
-            teacher: this.state.teacher,
-            group: this.state.group,
+            teacher: this.state.teacher || this.props.teacher,
+            group: this.state.group || this.props.group,
             title: this.state.title,
             type: this.state.type,
             auditory: this.state.auditory
@@ -101,7 +105,31 @@ export default class DaySchedule extends React.Component {
             this.setState({schedule: props.schedule});
         }
 
-        this.setState({day: props.day});
+        this.setState({showAddForm: props.showAddForm, day: props.day});
+    }
+
+    renderTeachers() {
+        if (this.props.teachers) {
+            return (
+                <select onChange={this.onValueChanged.bind(this)} name="teacher" className="form-control">
+                    <option value="">Select teacher</option>
+                    {this.props.teachers.map(t =>
+                        <option key={t._id} value={t._id}>{t.firstName} {t.lastName}</option>)}
+                </select>
+            );
+        }
+    }
+
+    renderGroups() {
+        if (this.props.groups) {
+            return (
+                <select onChange={this.onValueChanged.bind(this)} name="group" className="form-control">
+                    <option value="">Select group</option>
+                    {this.props.groups.map(g =>
+                        <option key={g._id} value={g._id}>{g.groupNumber}</option>)}
+                </select>
+            );
+        }
     }
 
     render() {
@@ -122,38 +150,51 @@ export default class DaySchedule extends React.Component {
                                     <th><Translate content="title" /></th>
                                     <th><Translate content="type" /></th>
                                     <th><Translate content="auditory" /></th>
-                                    <th>{this.context.user.role === 'student' ?
+                                    <th>{this.props.group ?
                                         <Translate content="teacher" /> : <Translate content="group" />}</th>
                                     <th><Translate content="actions" /></th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                    {this.state.schedule.map((s, i) => {
+                                    {this.props.schedule.map((s, i) => {
                                         return <tr key={s._id}>
                                             <td>{i + 1}</td>
                                             <td>{s.time}</td>
                                             <td>{s.title}</td>
                                             <td>{s.type}</td>
                                             <td>{s.auditory}</td>
-                                            <td></td>
+                                            <td>{this.props.group ? s.teacher.fullName : s.group.number}</td>
                                             <td></td>
                                         </tr>
                                     })}
                                 {this.state.showAddForm ?
                                 <tr>
                                     <td colSpan="2">
-                                        <input className="form-control" type="text" placeholder={this.state.localizationService.translate("time")} onChange={this.onValueChanged} />
+                                        <TimePicker onChange={this.onValueChanged} />
                                     </td>
                                     <td>
-                                        <input className="form-control" type="text" placeholder={this.state.localizationService.translate("title")} onChange={this.onValueChanged} />
+                                        <input className="form-control"
+                                               type="text"
+                                               placeholder={this.state.localizationService.translate("title")}
+                                               onChange={this.onValueChanged}
+                                               name="title" />
                                     </td>
                                     <td>
-                                        <input className="form-control" type="text" placeholder={this.state.localizationService.translate("type")} onChange={this.onValueChanged} />
+                                        <select name="type" className="form-control" onChange={this.onValueChanged}>
+                                            <option value="">Select type...</option>
+                                            {activityTypes.map(t =>
+                                                <option value={t.value} key={t.value}>{t.name}</option>
+                                            )}
+                                        </select>
                                     </td>
                                     <td>
-                                        <input className="form-control" type="text" placeholder={this.state.localizationService.translate("auditory")} onChange={this.onValueChanged} />
+                                        <input className="form-control"
+                                               type="text"
+                                               placeholder={this.state.localizationService.translate("auditory")}
+                                               onChange={this.onValueChanged}
+                                               name="auditory" />
                                     </td>
-                                    <td></td>
+                                    <td>{this.props.group ? this.renderTeachers() : this.renderGroups()}</td>
                                     <td>
                                         <button className="btn btn-xs btn-primary" onClick={this.save.bind(this)}>
                                             <i className="ion-checkmark-round"></i>

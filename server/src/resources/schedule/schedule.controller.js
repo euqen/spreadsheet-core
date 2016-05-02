@@ -17,7 +17,11 @@ export default {
         let query = {};
 
         if (req.query.teacher) {
-            query.teacher = req.query.teacher;
+            query['teacher._id'] = req.query.teacher;
+        }
+
+        if (req.query.group) {
+            query['group._id'] = req.query.group;
         }
 
         return service.find(query);

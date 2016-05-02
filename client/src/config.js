@@ -19,6 +19,7 @@ System.config({
     "babel": "npm:babel-core@5.8.35",
     "babel-runtime": "npm:babel-runtime@5.8.35",
     "bootstrap": "github:twbs/bootstrap@3.3.6",
+    "timepicker": "npm:bootstrap-timepicker@0.5.2",
     "core-js": "npm:core-js@1.2.6",
     "counterpart": "npm:counterpart@0.17.2",
     "driftyco/ionicons": "github:driftyco/ionicons@2.0.1",
@@ -26,12 +27,13 @@ System.config({
     "flux": "npm:flux@2.1.1",
     "jquery": "npm:jquery@2.2.0",
     "marcuswestin/store.js": "github:marcuswestin/store.js@1.3.20",
-    "moment": "npm:moment@2.12.0",
+    "moment": "npm:moment@2.13.0",
     "nicescroll": "assets/js/nice-scroll.min.js",
     "noty": "npm:noty@2.3.8",
-    "react": "npm:react@0.14.7",
+    "react": "npm:react@0.14.8",
     "react-dom": "npm:react-dom@0.14.7",
     "react-router": "npm:react-router@2.0.0",
+    "react-time-picker": "npm:react-time-picker@1.1.0",
     "react-translate-component": "npm:react-translate-component@0.10.0",
     "superagent": "npm:superagent@1.7.2",
     "github:jspm/nodelibs-assert@0.1.0": {
@@ -433,9 +435,6 @@ System.config({
       "process": "github:jspm/nodelibs-process@0.1.2",
       "systemjs-json": "github:systemjs/plugin-json@0.1.2"
     },
-    "npm:moment@2.12.0": {
-      "process": "github:jspm/nodelibs-process@0.1.2"
-    },
     "npm:node-fetch@1.3.3": {
       "buffer": "github:jspm/nodelibs-buffer@0.1.0",
       "encoding": "npm:encoding@0.1.12",
@@ -509,6 +508,9 @@ System.config({
     "npm:react-dom@0.14.7": {
       "react": "npm:react@0.14.8"
     },
+    "npm:react-event-names@1.0.0": {
+      "has-touch": "npm:has-touch@1.0.1"
+    },
     "npm:react-interpolate-component@0.8.1": {
       "except": "npm:except@0.1.3",
       "fbjs": "npm:fbjs@0.4.0",
@@ -522,15 +524,20 @@ System.config({
       "process": "github:jspm/nodelibs-process@0.1.2",
       "warning": "npm:warning@2.1.0"
     },
+    "npm:react-time-picker@1.1.0": {
+      "has-touch": "npm:has-touch@1.0.1",
+      "moment": "npm:moment@2.13.0",
+      "object-assign": "npm:object-assign@2.1.1",
+      "process": "github:jspm/nodelibs-process@0.1.2",
+      "react": "npm:react@0.14.8",
+      "react-event-names": "npm:react-event-names@1.0.0",
+      "react-style-normalizer": "npm:react-style-normalizer@1.2.8"
+    },
     "npm:react-translate-component@0.10.0": {
       "counterpart": "npm:counterpart@0.17.2",
       "object-assign": "npm:object-assign@4.0.1",
       "react": "npm:react@0.14.8",
       "react-interpolate-component": "npm:react-interpolate-component@0.8.1"
-    },
-    "npm:react@0.14.7": {
-      "fbjs": "npm:fbjs@0.6.1",
-      "process": "github:jspm/nodelibs-process@0.1.2"
     },
     "npm:react@0.14.8": {
       "fbjs": "npm:fbjs@0.6.1",

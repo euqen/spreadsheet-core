@@ -48,7 +48,9 @@ export default class Schedule extends React.Component {
                 <WeekSchedule
                     schedule={this.props.schedule}
                     teacher={this.props.teacher}
+                    teachers={this.props.teachers}
                     group={this.props.group}
+                    groups={this.props.groups}
                 />
             </div>
         );

@@ -7,7 +7,7 @@ export function save(data) {
     return api.post('api/v1/schedule/save', data)
         .then(res => {
             if (!res.hasErrors) {
-                dispatcher.dispatch({action: 'schedule.saved', data: res});
+                dispatcher.dispatch({action: 'schedule.created', data: res});
             }
         });
 }

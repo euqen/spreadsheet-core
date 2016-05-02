@@ -7,11 +7,11 @@ import counterpart from 'counterpart';
 import Translate from 'react-translate-component';
 
 counterpart.registerTranslations('en', {
-    alertMessage: "Please, select either teacher or group for filter",
+    alertMessage: "Please, select either teacher or group for filter"
 });
 
 counterpart.registerTranslations('ru', {
-    alertMessage: "Пожалуйста, выберите преподавателя или группу для фильтра",
+    alertMessage: "Пожалуйста, выберите преподавателя или группу для фильтра"
 });
 
 export default class WeekSchedule extends React.Component {
@@ -43,11 +43,14 @@ export default class WeekSchedule extends React.Component {
                 </div>
             );
         }
-
         return scheduleDays.map(day =>
             <DaySchedule
                 day={day}
                 schedule={this.props.schedule.filter(s => s.day === day.value)}
+                group={this.state.group}
+                groups={this.props.groups}
+                teacher={this.state.teacher}
+                teachers={this.props.teachers}
                 key={day.name}
             />)
     }

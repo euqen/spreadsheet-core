@@ -6,6 +6,7 @@ import languages from './../../internal/languages';
 import nodemailer from 'nodemailer';
 import generatePassword from "password-generator";
 import authService from './../auth/auth.service';
+import smtpConfig from './../../config/smtp-config';
 
 export default {
     create(req, res) {
@@ -15,7 +16,7 @@ export default {
                    return;
                 }
 
-                let password = authService.generateSecurePassword();
+                const password = authService.generateSecurePassword();
                 this.sendPasswordInMail(data.result.email, password);
 
                 data.result.locale = languages.en;
@@ -77,26 +78,14 @@ export default {
     },
 
     sendPasswordInMail(to, password) {
-        var smtpTransport = nodemailer.createTransport("SMTP",{
-            service: "Gmail",
-            auth: {
-                user: "bsuir2017@gmail.com",
-                pass: "bsuir12345"
-            }
-        });
+        var smtpTransport = nodemailer.createTransport("SMTP", smtpConfig);
 
         smtpTransport.sendMail({
             from: "bsuir2017@gmail.com",
             to: to,
             subject: "Your password in spreadsheet system",
             text: "Your password: " + password
-        }, function(error, response){
-            if(error){
-                console.log(error);
-            }else{
-                console.log("Message sent: " + response.message);
-            }
-
+        }, function(){
             smtpTransport.close();
         });
     }

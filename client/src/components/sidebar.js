@@ -11,7 +11,8 @@ counterpart.registerTranslations('en', {
         users: "Users",
         schedule: "Schedule",
         registrationSpace: "Registration space",
-        groups: "Groups"
+        groups: "Groups",
+        subjects: "Subjects"
     }
 });
 
@@ -21,7 +22,8 @@ counterpart.registerTranslations('ru', {
         users: "Пользователи",
         schedule: "Расписание",
         registrationSpace: "Регистрация",
-        groups: "Группы"
+        groups: "Группы",
+        subjects: "Предметы"
     }
 });
 
@@ -77,6 +79,12 @@ export default class SideBar extends React.Component {
                             <Link to="/groups">
                                 <i className="ion-person-add"></i>
                                 <span className="nav-label"><Translate content="sections.groups" /></span>
+                            </Link>
+                        </li>
+                        <li className={route === 'subjects' ? 'active' : ''}>
+                            <Link to="/subjects">
+                                <i className="ion-document-text"></i>
+                                <span className="nav-label"><Translate content="sections.subjects" /></span>
                             </Link>
                         </li>
                     </ul>

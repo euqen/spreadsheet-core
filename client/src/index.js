@@ -11,6 +11,9 @@ import Schedule from './modules/schedule/schedule.view';
 import GroupsList from './modules/groups/groups.list.view';
 import GroupDetails from './modules/groups/groups.details.view';
 import Profile from './modules/profile/profile.view';
+import Journal from './modules/journal/journal.view';
+import SubjectsList from './modules/subjects/subjects.list.view';
+import SubjectDetails from './modules/subjects/subjects.details.view';
 
 const Routes = (
   <Router history={browserHistory}>
@@ -23,6 +26,9 @@ const Routes = (
               <Route path="/groups" component={GroupsList} name="groups" />
               <Route path="/groups/:id" component={GroupDetails} name="group-create" />
               <Route path="/profile" component={Profile} name="profile" />
+              <Route path="/journal" component={Journal} name="journal" />
+              <Route path="/subjects" component={SubjectsList} name="subjects" />
+              <Route path="/subjects/:id" component={SubjectDetails} name="subject-create" />
           </Route>
       </Route>
   </Router>

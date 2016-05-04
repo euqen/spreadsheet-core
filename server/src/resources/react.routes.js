@@ -9,7 +9,10 @@ const routes = [
     '/schedule',
     '/groups',
     '/groups/:id',
-    '/profile'
+    '/profile',
+    '/journal',
+    '/subjects',
+    '/subjects/:id'
 ];
 
 export default function(app) { //handle all react.js routes

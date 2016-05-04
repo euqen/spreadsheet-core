@@ -20,5 +20,6 @@ export default function(app) {
     app.use('/api/v1/user', require('./user'));
     app.use('/api/v1/schedule', require('./schedule'));
     app.use('/api/v1/group', require('./group'));
+    app.use('/api/v1/subject', require('./subject'));
     app.use(globalErrorHandler);
 }

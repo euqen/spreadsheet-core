@@ -8,6 +8,7 @@ import Translate from 'react-translate-component';
 import LocalizationService from './../../../infrastructure/localization-service';
 import TimePicker from './../../../components/timepicker';
 import activityTypes from './../../../infrastructure/activity-types';
+import {Link} from 'react-router';
 
 counterpart.registerTranslations('en', {
     time: "Time",
@@ -48,13 +49,13 @@ counterpart.registerTranslations('ru', {
 const additionalConstants = {
     en: {
         time: "Time",
-        title: "Title",
+        title: "Subject",
         type: "Type",
         auditory: "Auditory"
     },
     ru: {
         time: "Время",
-        title: "Заголовок",
+        title: "Предмет",
         type: "Тип",
         auditory: "Аудитория"
     }
@@ -74,7 +75,8 @@ export default class DaySchedule extends React.Component {
             showAddForm: false,
             schedule: [],
             teacher: '',
-            group: ''
+            group: '',
+            subject: '',
         };
     }
 
@@ -92,7 +94,7 @@ export default class DaySchedule extends React.Component {
             time: this.state.time,
             teacher: this.state.teacher || this.props.teacher,
             group: this.state.group || this.props.group,
-            title: this.state.title,
+            subject: this.state.subject,
             type: this.state.type,
             auditory: this.state.auditory
         };
@@ -115,6 +117,19 @@ export default class DaySchedule extends React.Component {
                     <option value="">Select teacher</option>
                     {this.props.teachers.map(t =>
                         <option key={t._id} value={t._id}>{t.firstName} {t.lastName}</option>)}
+                </select>
+            );
+        }
+    }
+
+    renderSubjects() {
+        if (this.props.subjects) {
+            return (
+                <select onChange={this.onValueChanged.bind(this)} name="subject" className="form-control">
+                    <option value="">Select subject</option>
+                    {this.props.subjects.map(s =>
+                        <option key={s._id} value={s._id}>{s.name}</option>)
+                    }
                 </select>
             );
         }
@@ -160,11 +175,19 @@ export default class DaySchedule extends React.Component {
                                         return <tr key={s._id}>
                                             <td>{i + 1}</td>
                                             <td>{s.time}</td>
-                                            <td>{s.title}</td>
+                                            <td>{s.subject.name}</td>
                                             <td>{s.type}</td>
                                             <td>{s.auditory}</td>
                                             <td>{this.props.group ? s.teacher.fullName : s.group.number}</td>
-                                            <td></td>
+                                            <td>
+                                                <Link to={
+                                                "/journal?groupId=" + s.group._id
+                                                + "&teacherId=" + s.teacher._id
+                                                + "&subjectId=" + s.subject._id
+                                                } className="btn btn-xs btn-primary">
+                                                    <i className="ion-clipboard"></i>
+                                                </Link>
+                                            </td>
                                         </tr>
                                     })}
                                 {this.state.showAddForm ?
@@ -173,11 +196,7 @@ export default class DaySchedule extends React.Component {
                                         <TimePicker onChange={this.onValueChanged} />
                                     </td>
                                     <td>
-                                        <input className="form-control"
-                                               type="text"
-                                               placeholder={this.state.localizationService.translate("title")}
-                                               onChange={this.onValueChanged}
-                                               name="title" />
+                                        {this.renderSubjects()}
                                     </td>
                                     <td>
                                         <select name="type" className="form-control" onChange={this.onValueChanged}>

@@ -51,6 +51,7 @@ export default class WeekSchedule extends React.Component {
                 groups={this.props.groups}
                 teacher={this.state.teacher}
                 teachers={this.props.teachers}
+                subjects={this.props.subjects}
                 key={day.name}
             />)
     }

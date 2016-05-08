@@ -11,12 +11,16 @@ export default class JournalStore extends Store {
         super();
 
         this.students = [];
+        this.schedules = [];
         this.registerDispatcherEvents();
     }
 
     registerDispatcherEvents() {
         dispatcher.on('students.retrieve', this.onStudentsRetrieve.bind(this));
         dispatcher.on('students.retrieved', this.onStudentsRetrieved.bind(this));
+
+        dispatcher.on('schedules.retrieve', this.onSchedulesRetrieve.bind(this));
+        dispatcher.on('schedules.retrieved', this.onSchedulesRetrieved.bind(this));
 
     }
 
@@ -29,4 +33,12 @@ export default class JournalStore extends Store {
         this.trigger('changed');
     }
 
+    onSchedulesRetrieve(payload) {
+        return actions.getSchedules(payload.groupId, payload.teacherId, payload.subjectId);
+    }
+
+    onSchedulesRetrieved(payload) {
+        this.schedules = payload.data;
+        this.trigger('changed');
+    }
 }

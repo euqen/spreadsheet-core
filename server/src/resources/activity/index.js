@@ -6,5 +6,6 @@ const controller = responsify(scheduleController);
 const router = express.Router();
 
 router.get('/students', controller.getStudents);
+router.get('/schedules', controller.getSchedules);
 
 export default router;

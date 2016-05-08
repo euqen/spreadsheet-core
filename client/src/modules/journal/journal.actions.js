@@ -11,3 +11,12 @@ export function getStudents(data) {
             }
         });
 }
+
+export function getSchedules(data) {
+    return api.get('/api/v1/activity/schedules', data)
+        .then(res => {
+            if (!res.hasErrors) {
+                dispatcher.dispatch({action: 'schedules.retrieved', data: res});
+            }
+        });
+}

@@ -51,13 +51,21 @@ const additionalConstants = {
         time: "Time",
         title: "Subject",
         type: "Type",
-        auditory: "Auditory"
+        auditory: "Auditory",
+        selectSubject: "Select subject",
+        selectTeacher: "Select teacher",
+        selectSchedule: "Select schedule",
+        selectType: "Select type..."
     },
     ru: {
         time: "Время",
         title: "Предмет",
         type: "Тип",
-        auditory: "Аудитория"
+        auditory: "Аудитория",
+        selectSubject: "Выберите предмет",
+        selectTeacher: "Выберите преподавателя",
+        selectSchedule: "Выберите расписание",
+        selectType: "Выберите тип..."
     }
 };
 
@@ -114,7 +122,7 @@ export default class DaySchedule extends React.Component {
         if (this.props.teachers) {
             return (
                 <select onChange={this.onValueChanged.bind(this)} name="teacher" className="form-control">
-                    <option value="">Select teacher</option>
+                    <option value="">{this.state.localizationService.translate("selectTeacher")}</option>
                     {this.props.teachers.map(t =>
                         <option key={t._id} value={t._id}>{t.firstName} {t.lastName}</option>)}
                 </select>
@@ -126,7 +134,7 @@ export default class DaySchedule extends React.Component {
         if (this.props.subjects) {
             return (
                 <select onChange={this.onValueChanged.bind(this)} name="subject" className="form-control">
-                    <option value="">Select subject</option>
+                    <option value="">{this.state.localizationService.translate("selectSubject")}</option>
                     {this.props.subjects.map(s =>
                         <option key={s._id} value={s._id}>{s.name}</option>)
                     }
@@ -139,7 +147,7 @@ export default class DaySchedule extends React.Component {
         if (this.props.groups) {
             return (
                 <select onChange={this.onValueChanged.bind(this)} name="group" className="form-control">
-                    <option value="">Select group</option>
+                    <option value="">{this.state.localizationService.translate("selectGroup")}</option>
                     {this.props.groups.map(g =>
                         <option key={g._id} value={g._id}>{g.groupNumber}</option>)}
                 </select>
@@ -200,7 +208,7 @@ export default class DaySchedule extends React.Component {
                                     </td>
                                     <td>
                                         <select name="type" className="form-control" onChange={this.onValueChanged}>
-                                            <option value="">Select type...</option>
+                                            <option value="">{this.state.localizationService.translate("selectType")}</option>
                                             {activityTypes.map(t =>
                                                 <option value={t.value} key={t.value}>{t.name}</option>
                                             )}

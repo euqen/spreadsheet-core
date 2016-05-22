@@ -11,11 +11,13 @@ import store from './journal.store';
 import DateGenerator from './../../infrastructure/date-generator';
 
 counterpart.registerTranslations('en', {
-    journal: "Journal"
+    journal: "Journal",
+    studentName: "Student Name"
 });
 
 counterpart.registerTranslations('ru', {
-    journal: "Журнал"
+    journal: "Журнал",
+    studentName: "Имя студента"
 });
 
 function getState(props) {
@@ -31,8 +33,7 @@ function getState(props) {
 export default class Journal extends React.Component {
     constructor() {
         super();
-        this.state =
-        {
+        this.state = {
             students: {},
             schedules: {},
             currentDay: new Date(),
@@ -42,7 +43,7 @@ export default class Journal extends React.Component {
     }
 
     componentDidMount() {
-        var { groupId, teacherId, subjectId } = this.props.location.query;
+        let { groupId, teacherId, subjectId } = this.props.location.query;
         dispatcher.dispatch({action: 'students.retrieve', groupId: groupId});
         dispatcher.dispatch({action: 'schedules.retrieve', groupId: groupId, teacherId: teacherId, subjectId: subjectId});
     }
@@ -64,7 +65,7 @@ export default class Journal extends React.Component {
     }
 
     getActivities() {
-        var { groupId, teacherId, subjectId } = this.props.location.query;
+        let { groupId, teacherId, subjectId } = this.props.location.query;
 
         for(let i = 0; i < this.props.schedules.length; i++) {
             let time = this.props.schedules[i].time;
@@ -144,7 +145,7 @@ export default class Journal extends React.Component {
                                         <thead>
                                         <tr>
                                             <th>#</th>
-                                            <th>Student name</th>
+                                            <th><Translate content="studentName" /></th>
                                             {
                                                 this.props.schedules ?
                                                 this.props.schedules.map((schedule, index) =>

@@ -1,4 +1,3 @@
-//import saveValidator from './validators/schedule.save.validator';
 import service from './activity.service';
 import userService from './../user/user.service';
 import scheduleService from './../schedule/schedule.service';
@@ -63,7 +62,7 @@ export default {
             query.time = req.query.time;
             query.subjectId = req.query.subjectId;
         }
-        console.log(query);
+        
         return service.find(query);
     },
 

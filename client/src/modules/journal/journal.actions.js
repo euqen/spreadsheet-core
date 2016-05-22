@@ -20,3 +20,21 @@ export function getSchedules(data) {
             }
         });
 }
+
+export function saveActivity(data) {
+    return api.post('api/v1/activity/save', data)
+        .then(res => {
+            if (!res.hasErrors) {
+                dispatcher.dispatch({action: 'activity.saved', data: res});
+            }
+        });
+}
+
+export function getActivities(data) {
+    return api.get('/api/v1/activity/activities', data)
+        .then(res => {
+            if (!res.hasErrors) {
+                dispatcher.dispatch({action: 'activities.retrieved', data: res});
+            }
+        });
+}

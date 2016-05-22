@@ -8,7 +8,7 @@ import ErrorCollector from './../../components/error-collector';
 import counterpart from 'counterpart';
 import Translate from 'react-translate-component';
 import store from './journal.store';
-import moment from 'moment';
+import DateGenerator from './../../infrastructure/date-generator';
 
 counterpart.registerTranslations('en', {
     journal: "Journal"
@@ -22,19 +22,10 @@ function getState(props) {
     return {
         user: props.user,
         students: props.students,
-        schedules: props.schedules
+        schedules: props.schedules,
+        activities: props.activities
     }
 }
-
-const days = {
-    monday: 0,
-    tuesday: 1,
-    wednesday: 2,
-    thursday: 3,
-    friday: 4,
-    saturday: 5,
-    sunday: 6
-};
 
 @bind(store, getState)
 export default class Journal extends React.Component {
@@ -44,9 +35,10 @@ export default class Journal extends React.Component {
         {
             students: {},
             schedules: {},
-            currentDay: new Date()
+            currentDay: new Date(),
+            activities: []
         };
-        // this.state = this.getInitState();
+
     }
 
     componentDidMount() {
@@ -57,10 +49,13 @@ export default class Journal extends React.Component {
 
     componentWillReceiveProps(props) {
         if (props.students) {
-            this.state.students = props.students;
+            this.setState({students: props.students});
         }
         if (props.schedules) {
-            this.state.schedules = props.schedules;
+            this.setState({schedules: props.schedules});
+        }
+        if (props.activities) {
+            this.setState({activities: props.activities});
         }
     }
 
@@ -68,29 +63,61 @@ export default class Journal extends React.Component {
         return student.lastName + " " + student.firstName + " " + student.middleName;
     }
 
-    getDate(day, date) {
-        let mondayDate = this.getMonday(date);
-        let resultDate = new Date(mondayDate.valueOf() + days[day] * 86400000);
-        return moment(resultDate).format("DD/MM/YYYY");
-    }
+    getActivities() {
+        var { groupId, teacherId, subjectId } = this.props.location.query;
 
-    getMonday(d) {
-        var day = d.getDay(),
-            diff = d.getDate() - day + (day == 0 ? -6:1); // adjust when day is sunday
-        return new Date(d.setDate(diff));
+        for(let i = 0; i < this.props.schedules.length; i++) {
+            let time = this.props.schedules[i].time;
+            let date = DateGenerator.getDate(this.props.schedules[i].day, this.state.currentDay);
+            const payload = {
+                teacherId: teacherId,
+                subjectId: subjectId,
+                date: date,
+                time: time
+            };
+
+            dispatcher.dispatch({action: 'activities.retrieve', teacherId: payload.teacherId, date: payload.date, time: payload.time, subjectId: payload.subjectId});
+        }
     }
 
     shiftLeft() {
+        dispatcher.dispatch({action: 'activities.clear'});
         let newCurrentDay = new Date(this.state.currentDay.valueOf() - 7 * 86400000);
-        this.setState({currentDay: newCurrentDay});
+        this.state.currentDay = newCurrentDay;
+        this.getActivities();
     }
 
     shiftRight() {
         let now = new Date();
         if(now.valueOf() >= this.state.currentDay.valueOf() + 7 * 86400000) {
+            dispatcher.dispatch({action: 'activities.clear'});
             let newCurrentDay = new Date(this.state.currentDay.valueOf() + 7 * 86400000);
-            this.setState({currentDay: newCurrentDay});
+            this.state.currentDay = newCurrentDay;
+            this.getActivities();
         }
+    }
+
+    onValueChanged(date, time, studentId, studentIndex, scheduleIndex, event) {
+        var { groupId, teacherId, subjectId } = this.props.location.query;
+        const data = {
+            studentId: studentId,
+            createdOn: new Date(),
+            teacherId: teacherId,
+            date: date,
+            time: time,
+            subjectId: subjectId,
+            value: event.target.value,
+            presence: true
+        };
+        dispatcher.dispatch({action: 'activity.save', data: data});
+        if(!this.state.activities) this.state.activities = [];
+        if(!this.state.activities[scheduleIndex]) this.state.activities[scheduleIndex] = [];
+
+        if(!this.state.activities[scheduleIndex][studentIndex])
+            this.state.activities[scheduleIndex][studentIndex] = data;
+
+        this.state.activities[scheduleIndex][studentIndex].value = event.target.value;
+
     }
 
     render() {
@@ -121,7 +148,7 @@ export default class Journal extends React.Component {
                                             {
                                                 this.props.schedules ?
                                                 this.props.schedules.map((schedule, index) =>
-                                                <th key={schedule._id}>{this.getDate(schedule.day, this.state.currentDay)} {schedule.time}</th>
+                                                <th key={schedule._id}>{DateGenerator.getDate(schedule.day, this.state.currentDay)} {schedule.time}</th>
                                                 ) : null
                                             }
                                         </tr>
@@ -129,17 +156,20 @@ export default class Journal extends React.Component {
                                         <tbody>
                                         {
                                             this.props.students ?
-                                            this.props.students.map((student, index) =>
+                                            this.props.students.map((student, studentIndex) =>
                                             <tr key={student._id}>
-                                                <th>{index + 1}</th>
+                                                <th>{studentIndex + 1}</th>
                                                 <th>{this.getStudentFullname(student)}</th>
                                                 {
                                                     this.props.schedules ?
-                                                    this.props.schedules.map((schedule, index) =>
-                                                    <th>
+                                                    this.props.schedules.map((schedule, scheduleIndex) =>
+                                                    <th key={schedule._id}>
                                                         <input key={schedule._id + student._id} className="form-control"
                                                                type="text"
-                                                               onChange={this.onValueChanged}
+                                                               data-student-id={student._id}
+                                                               data-schedule-id={schedule._id}
+                                                               value={this.state.activities[scheduleIndex] ? this.state.activities[scheduleIndex].find(e => e.studentId === student._id) ? this.state.activities[scheduleIndex].find(e => e.studentId === student._id).value : '' : ''}
+                                                               onChange={this.onValueChanged.bind(this, DateGenerator.getDate(schedule.day, this.state.currentDay), schedule.time, student._id, studentIndex, scheduleIndex)}
                                                                name="assessment" />
                                                     </th>
                                                     ) : null

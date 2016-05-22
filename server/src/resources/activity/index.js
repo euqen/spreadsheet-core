@@ -7,5 +7,7 @@ const router = express.Router();
 
 router.get('/students', controller.getStudents);
 router.get('/schedules', controller.getSchedules);
+router.post('/save', controller.save);
+router.get('/activities', controller.getActivities);
 
 export default router;

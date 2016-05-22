@@ -76,7 +76,6 @@ export default class JournalStore extends Store {
     }
 
     onActivitySaved(payload) {
-        //this._activity.push(payload.data);
         this.trigger('changed');
     }
 

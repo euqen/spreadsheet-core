@@ -12,6 +12,7 @@ function getState(props) {
     return {
         schedule: props.schedule,
         teachers: props.teachers,
+        subjects: props.subjects,
         groups: props.groups,
         group: props.group,
         teacher: props.teacher
@@ -26,6 +27,7 @@ export default class Schedule extends React.Component {
             schedule: [],
             teachers: [],
             groups: [],
+            subjects: [],
             group: {},
             teacher: {}
         }
@@ -35,6 +37,7 @@ export default class Schedule extends React.Component {
         dispatcher.dispatch({action: 'schedule.retrieve', data: {}});
         dispatcher.dispatch({action: 'teachers.retrieve'});
         dispatcher.dispatch({action: 'groups.retrieve'});
+        dispatcher.dispatch({action: 'subjects.retrieve'});
     }
 
     render() {
@@ -49,6 +52,7 @@ export default class Schedule extends React.Component {
                     schedule={this.props.schedule}
                     teacher={this.props.teacher}
                     teachers={this.props.teachers}
+                    subjects={this.props.subjects}
                     group={this.props.group}
                     groups={this.props.groups}
                 />

@@ -3,6 +3,7 @@ import validator from 'validator';
 import {VALIDATION_MESSAGES} from './../../../utils/constants';
 import userService from './../../user/user.service';
 import groupService from './../../group/group.service';
+import subjectService from './../../subject/subject.service';
 import roles from './../../../internal/roles';
 
 export default function(req, res) {
@@ -11,7 +12,7 @@ export default function(req, res) {
         const time = req.body.time;
         const type = req.body.type;
         const teacher = req.body.teacher;
-        const title = req.body.title;
+        const subject = req.body.subject;
         const group = req.body.group;
         const auditory = req.body.auditory;
 
@@ -47,7 +48,6 @@ export default function(req, res) {
             day: day,
             time: time,
             type: type,
-            title: title,
             auditory: auditory
         };
 
@@ -76,8 +76,20 @@ export default function(req, res) {
                     number: group.groupNumber
                 };
 
+                return subjectService.findOne({_id: subject});
+            })
+            .then(subject => {
+                if (!subject) {
+                    errors.collect('user', VALIDATION_MESSAGES.SUBJECT_NOT_EXISTS);
+                    return;
+                }
+
+                result.subject = {
+                    _id: subject._id.toString(),
+                    name: subject.name
+                };
+
                 return result;
             });
-
     }, req, res);
 }

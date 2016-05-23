@@ -12,7 +12,8 @@ const routes = [
     '/profile',
     '/journal',
     '/subjects',
-    '/subjects/:id'
+    '/subjects/:id',
+    '/activity'
 ];
 
 export default function(app) { //handle all react.js routes

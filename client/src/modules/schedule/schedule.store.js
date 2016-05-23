@@ -7,6 +7,7 @@ import Store from './../../infrastructure/store';
 import * as userActions from './../users/users.actions';
 import * as groupActions from './../groups/groups.actions';
 import * as scheduleActions from './schedule.actions';
+import * as subjectActions from './../subjects/subjects.actions';
 
 export default class ScheduleStore extends Store {
     constructor() {
@@ -28,12 +29,16 @@ export default class ScheduleStore extends Store {
 
         dispatcher.on('groups.retrieve', this.onGroupsRetrieve.bind(this));
         dispatcher.on('groups.retrieved', this.onGroupsRetrieved.bind(this));
+
+        dispatcher.on('subjects.retrieve', this.onSubjectsRetrieve.bind(this));
+        dispatcher.on('subjects.retrieved', this.onSubjectsRetrieved.bind(this));
     }
 
     setDefaults() {
         this._schedule = [];
         this._teachers = [];
         this._groups = [];
+        this._subjects = [];
 
         this._group = null;
         this._teacher = null;
@@ -49,6 +54,10 @@ export default class ScheduleStore extends Store {
 
     get groups() {
         return this._groups;
+    }
+
+    get subjects() {
+        return this._subjects;
     }
 
     get group() {
@@ -72,6 +81,10 @@ export default class ScheduleStore extends Store {
         return groupActions.getGroups();
     }
 
+    onSubjectsRetrieve() {
+        return subjectActions.getSubjects();
+    }
+
     onGroupsRetrieved(payload) {
         this._groups = payload.data;
         this.trigger('changed');
@@ -86,6 +99,11 @@ export default class ScheduleStore extends Store {
 
     onTeachersRetrieved(payload) {
         this._teachers = payload.data;
+        this.trigger('changed');
+    }
+
+    onSubjectsRetrieved(payload) {
+        this._subjects = payload.data;
         this.trigger('changed');
     }
 

@@ -53,7 +53,8 @@ export default function(req, res) {
                     password: authService.generateHash(password),
                     rawPassword: password,
                     role: role,
-                    isRemoved: false
+                    isRemoved: false,
+                    group: group
                 }
             });
 

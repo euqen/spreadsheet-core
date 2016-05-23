@@ -95,7 +95,7 @@ export default class SubjectDetails extends React.Component {
                             <div className="form-group">
                                 <button onClick={this.save.bind(this)} type="button" className="btn btn-success pull-right"><Translate content="save" /></button>
                             </div>
-                            <div className="clear"></div>
+                            <div className="clearfix"></div>
                         </div>
                     </div>
                 </div>
